@@ -73,6 +73,14 @@ function show(id = ""){
   }
 }
 
+//This button handles the user log in
+const logIn = document.getElementById('log-in-button')
+logIn.addEventListener("click", (event) => {
+  event.preventDefault();
+  show('display-0')
+  hide('display-log-in')
+})
+
 const btn = document.getElementById("end")
 btn.addEventListener("click", (event) => {
   event.preventDefault()
