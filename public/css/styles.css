@@ -1,0 +1,123 @@
+body{
+  background-color: rgb(149, 150, 156);
+}
+
+.question-type{
+  margin-left:3rem;
+  background-color: rgb(24, 25, 26);
+  transform: translateY(2rem) translateX(0rem);
+  width: fit-content;
+  padding: .5rem 1rem;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.question-type p{
+  text-transform: uppercase;
+  color: white;
+  font-weight: 700;
+}
+
+.exam-container{
+  margin: 3rem;
+  background-color: aliceblue;
+  padding: 1.5rem;
+  box-shadow: 1px 1px 1px 1px gray;
+  border-radius: 0px 3px 3px 3px;
+}
+
+.question-number {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.question-text {
+  font-size: 1.3rem;
+  font-weight: 500;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+label {
+  font-size: 1.2rem;
+}
+
+.hide {
+  display: none;
+}
+
+.form-group{
+  font-size: 1.2rem;
+}
+
+.timer {
+  position: absolute;
+  right: 3rem;
+  top: 0rem;
+  background-color: none;
+  padding: .5rem;
+}
+
+.timer p {
+  font-size: 1.8rem;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.instructions {
+  margin-top: 1rem;
+  background-color: whitesmoke;
+  padding: 1rem;
+  box-shadow: 1px 1px 1px 1px gray;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.instructions h4 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.instructions p {
+  font-size: 1.4rem;
+  text-align: justify;
+  line-height: 3rem;
+}
+
+.submit-exam-box {
+  float: right;
+  margin-right: 10.8rem;
+  transform: translateY(-1rem);
+}
+
+/*--Medium (md) devices (tablets, 768px and up)--*/
+@media (max-width: 768px) { 
+  .exam-container{
+    margin: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .question-type{
+    margin-left:1rem;
+    transform: translateY(1rem);
+  }
+
+  .submit-exam-box {
+    margin-right: 1.8rem;
+    transform: translateY(-2.1rem);
+  }
+}
+
+/*--Media Queries--*/
+/*
+Extra small (xs) devices (portrait phones, less than 576px)
+No media query since this is the default in Bootstrap
+
+Small (sm) devices (landscape phones, 576px and up)
+@media (min-width: 576px) { ... }
+
+Medium (md) devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+Large (lg) devices (desktops, 992px and up)
+@media (min-width: 992px) { ... }
+
+Extra large (xl) devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {...}
+*/
