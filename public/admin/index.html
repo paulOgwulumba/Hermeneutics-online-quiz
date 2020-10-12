@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Log in</title>
+
+  <!--Bootstrap CSS File-->
+  <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
+
+  <!--Font-Awesome CSS File-->
+  <link rel="stylesheet" href="../lib/font-awesome/css/font-awesome.min.css">
+
+  <!--Hover CSS-->
+  <link rel="stylesheet" href="../css/hover.css">
+
+  <!--Stylesheet-->
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body>
+
+  <!--Log in-->
+  <div class="container" id="display-log-in">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p class="text-center">Enter your log in details</p>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <input type="text" class="form-control" id="username" placeholder="Username">
+            </div>
+            <div class="form-group" style="padding: 0rem">
+              <input type="password" class="form-control" id="password" placeholder="Password">
+            </div>
+            <div class="form-group hide" id="form-response">
+              <small class="text-center text-danger">Wrong password and/or username</small>
+            </div>
+            <div class="form-group hide" id="form-empty">
+              <small class="text-center text-danger">Please enter username and password before hitting submit</small>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button type="submit" class="btn btn-info hvr-grow" id="log-in-button">Log in</button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!--Javascript files-->
+  <script src="../lib/jquery/jquery.min.js"></script>
+  <script src="../lib/jquery/jquery-migrate.min.js"></script>
+  <script src="../lib/popper/popper.min.js"></script>
+  <script src="../lib/bootstrap/js/bootstrap.min.js"></script>  
+
+  <script src="./js/login.js"></script>
+</body>
+</html>

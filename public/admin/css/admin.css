@@ -1,0 +1,11 @@
+body{
+  background-color: whitesmoke;
+}
+
+.exam-container{
+  padding: 3.4rem;
+}
+
+.exam-container .form-group {
+  margin: 1rem;
+}
