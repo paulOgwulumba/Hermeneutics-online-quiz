@@ -9,3 +9,42 @@ body{
 .exam-container .form-group {
   margin: 1rem;
 }
+
+.overlay-mf {
+  background-color: black;
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+  z-index: 0;
+}
+
+.header-text {
+  color: white;
+  font-weight: 300;
+  text-shadow: blue 1px 1px 1px 1px;
+  z-index: 1000;
+  transform: translateY(4rem);
+}
+
+.buttons{
+  z-index: 1000;
+  transform: translateY(6rem);
+}
+
+.student-info{
+  z-index: 1000;
+  transform: translateY(6rem);
+  padding-right: 20%;
+  padding-left: 20%;
+}
+
+.form-group{
+  margin-top: 2rem;
+}
+
+.table {
+  background-color: whitesmoke;
+}

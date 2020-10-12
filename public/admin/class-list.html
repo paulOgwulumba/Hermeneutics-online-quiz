@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Home Page</title>
+  <title>Admin | Class List</title>
 
   <!--Bootstrap CSS File-->
   <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
@@ -29,11 +29,11 @@
     
       <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link hvr-float" href="./add-students.html"><small>Add students</small></a>
           </li>
           <li class="nav-item">
-            <a href="./class-list.html" class="nav-link hvr-float"><small>Class List</small></a>
+            <a href="./class-list.html" class="nav-link"><small class="text-muted">Class List</small></a>
           </li>
         </ul>
       </div>
@@ -41,18 +41,42 @@
   </nav>
 
   <div class="container">
-    <h2 class="display-4 text-center header-text">
-      Welcome to the Admin Home Page.
-    </h2>
+    <h4 class="display-5 text-center header-text">
+      Hermeneutics I Class List
+    </h4>
   </div>
 
-  <div class="container buttons">
-    <p class="text-center">
-      <a href="./add-students.html" class="btn btn-outline-primary">Add Students</a>
-      &nbsp;&nbsp;
-      <a href="./class-list.html" class="btn btn-outline-light">View Class List</a>
-    </p>
+  <div class="container">
+    <table class="student-info table table-bordered table-striped table-hover">
+      <thead>
+        <th>S/N</th>
+        <th>Name</th>
+        <th>Student ID</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Iheanyichukwu Mgbokwe</td>
+          <td>0890</td>
+          <td>something@somewhere.com</td>
+          <td>08149585413</td>
+          <td><button class="btn btn-outline-danger">Delete</button></td>
+        </tr>
+
+        <tr>
+          <td>2</td>
+          <td>Iheanyichukwu Mgbokwe</td>
+          <td>0890</td>
+          <td>something@somewhere.com</td>
+          <td>08149585413</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+
 
   <!--Javascript files-->
   <script src="../lib/jquery/jquery.min.js"></script>

@@ -18,6 +18,10 @@
   <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
+
+  <div class="overlay-mf"></div>
+  
+
   <!--Navbar-->
   <nav class ="navbar navbar-dark bg-dark">
     <a class ="navbar-brand" href ="#" id="tester"> Hermeneutics Online Exam </a>
@@ -81,7 +85,7 @@
     <div class="exam-container" style="padding: 2rem">
       <div class="row">
         <div class="col-12 question-number">
-          <p class="text-center">Enter your log in details</p>
+          <p class="text-center display-6">Enter your log in details</p>
         </div>
       </div>
       <br>
@@ -97,7 +101,7 @@
             <hr>
             <div class="form-group">
               <p class="text-center">
-                <button class="btn btn-info hvr-grow" id="log-in-button">Log in</button>
+                <button class="btn btn-outline-light hvr-grow" id="log-in-button">Log in</button>
               </p>
             </div>
           </form>
@@ -150,7 +154,7 @@
   <div class="container hide" id="display-0">
     <div class="row instructions">
       <div class="col-12">
-        <h4 class="text-center">
+        <h4 class="text-center display-6">
           Read the following instructions carefully before you proceed.
         </h4>
         <p class="">
@@ -165,7 +169,7 @@
           Good luck and may God be with you.
         </p>
         <p class="text-center">
-          <button id="start-exam" class="btn btn-lg btn-outline-dark">Start Exam</button>
+          <button id="start-exam" class="btn btn-lg btn-outline-light">Start Exam</button>
         </p>
       </div>
     </div>
@@ -186,7 +190,7 @@
 
   <!--Submit exam button-->
   <div class="submit-exam-box hide" id="submit-exam-box">
-    <button class="btn btn-lg btn-danger" id="submit-exam">Submit Exam</button>
+    <button class="btn btn-lg btn-outline-danger" id="submit-exam">Submit Exam</button>
   </div>
 
   <!-- Question 1 -->
@@ -2777,6 +2781,8 @@
       </div>    
     </div>
   </div>
+
+  
 
   <!--Javascript files-->
   <script src="./lib/jquery/jquery.min.js"></script>

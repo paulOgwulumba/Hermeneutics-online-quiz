@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Home Page</title>
+  <title>Admin | Add Student</title>
 
   <!--Bootstrap CSS File-->
   <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
@@ -30,9 +30,9 @@
       <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link hvr-float" href="./add-students.html"><small>Add students</small></a>
+            <a  disabled class="nav-link" href="./add-students.html"><small class="text-muted">Add students</small></a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a href="./class-list.html" class="nav-link hvr-float"><small>Class List</small></a>
           </li>
         </ul>
@@ -41,18 +41,37 @@
   </nav>
 
   <div class="container">
-    <h2 class="display-4 text-center header-text">
-      Welcome to the Admin Home Page.
-    </h2>
+    <h4 class="display-5 text-center header-text">
+      Enter student information to add them to the class list
+    </h4>
   </div>
 
-  <div class="container buttons">
-    <p class="text-center">
-      <a href="./add-students.html" class="btn btn-outline-primary">Add Students</a>
-      &nbsp;&nbsp;
-      <a href="./class-list.html" class="btn btn-outline-light">View Class List</a>
-    </p>
+  <div class="container">
+    <form role="form" class="student-info">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Full Name" id="name">
+      </div>
+
+      <div class="form-group">
+        <input type="number" class="form-control" placeholder="Student ID" id="student_id">
+      </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Mobile Number" id="mobile_number">
+      </div>
+
+      <div class="form-group">
+        <input type="email" class="form-control" placeholder="Email Address" id="email">
+      </div>
+
+      <div class="form-group">
+        <p class="text-center">
+          <button class="btn btn-outline-primary">Add student</button>
+        </p>
+      </div>
+    </form>
   </div>
+
 
   <!--Javascript files-->
   <script src="../lib/jquery/jquery.min.js"></script>
