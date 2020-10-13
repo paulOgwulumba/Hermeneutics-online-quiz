@@ -11,7 +11,7 @@ const Datastore = require('nedb');
 require('dotenv').config({path: __dirname + '/.env'});
 
 //initialise database objects
-const student_base =  new Datastore({filename: 'student_base.db', autoload: true})
+//const student_base =  new Datastore({filename: 'db/student_base.db', autoload: true})
 
 //Initialise express object
 const server = express();
