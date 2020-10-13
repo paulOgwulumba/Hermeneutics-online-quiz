@@ -18,7 +18,7 @@ admin.post('/log-in', (request, response) => {
 //Adds student infp to the student database
 admin.post('/student', (request, response) => {
   //console.log(request.body)
-  response.send({status: "OK"})
+  response.send({status: "OKWE"})
 })
 
 module.exports = admin

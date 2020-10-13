@@ -38,6 +38,10 @@ form.addEventListener('submit', event => {
           document.getElementsByClassName("display-5")[0].innerHTML = 'Student added successfully! <span class="fa fa-check"></span>'
           document.getElementsByClassName("display-5")[0].className += " text-success"
         }
+        else{
+          document.getElementsByClassName("display-5")[0].innerHTML = 'Something went wrong! <span class="fa fa-close"></span> Please try again'
+          document.getElementsByClassName("display-5")[0].className += " text-danger"
+        }
       })
   }
 })
