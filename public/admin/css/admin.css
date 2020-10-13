@@ -48,3 +48,13 @@ body{
 .table {
   background-color: whitesmoke;
 }
+
+.login-container{
+  margin: 3rem;
+  background-color: transparent;
+  padding: 1.5rem;
+  box-shadow: 1px 1px 1px 1px gray;
+  border-radius: 0px 3px 3px 3px;
+  z-index: 1000;
+  color: white;
+}
