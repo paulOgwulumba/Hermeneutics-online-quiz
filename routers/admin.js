@@ -19,11 +19,12 @@ admin.post('/log-in', (request, response) => {
   }
 })
 
-//Adds student infp to the student database
+//Adds student info to the student database
 admin.post('/student', (request, response) => {
   let obj = request.body;
   let objKeys = Object.keys(obj)
 
+  //Checks for any empty field
   for(let key of objKeys){
     if(obj[key] === ""){
       response.send({status: "FAILED"})
@@ -41,4 +42,12 @@ admin.post('/student', (request, response) => {
   }
 })
 
+//Sends the class list to the clientside
+admin.get('/students', (request, response) => {
+  student_db.find({}, (error, document)=> {
+    if(error) throw error;
+
+    response.send(document)
+  })
+})
 module.exports = admin

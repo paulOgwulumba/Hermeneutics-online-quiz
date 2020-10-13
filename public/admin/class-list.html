@@ -46,7 +46,7 @@
     </h4>
   </div>
 
-  <div class="container">
+  <div class="container" id="table">
     <table class="student-info table table-bordered table-striped table-hover">
       <thead>
         <th>S/N</th>
@@ -56,25 +56,17 @@
         <th>Phone Number</th>
       </thead>
 
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Iheanyichukwu Mgbokwe</td>
-          <td>0890</td>
-          <td>something@somewhere.com</td>
-          <td>08149585413</td>
-          <td><button class="btn btn-outline-danger">Delete</button></td>
-        </tr>
-
-        <tr>
-          <td>2</td>
-          <td>Iheanyichukwu Mgbokwe</td>
-          <td>0890</td>
-          <td>something@somewhere.com</td>
-          <td>08149585413</td>
-        </tr>
+      <tbody id="tbody">
+        
       </tbody>
     </table>
+  </div>
+
+  <div class="student-info hide" id="error-message">
+    <h4 class="display-5 text-warning text-center">
+      No response from server!!! &nbsp;
+      Refresh the page
+    </h4>
   </div>
 
 
@@ -83,5 +75,7 @@
   <script src="../lib/jquery/jquery-migrate.min.js"></script>
   <script src="../lib/popper/popper.min.js"></script>
   <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+
+  <script src="js/class-list.js"></script>
 </body>
 </html>
