@@ -121,7 +121,6 @@ function deleteUser(id = ""){
   //creates new eventlisteners for the promptbox
   prevYesListener = (event) => {
     promptBox.className += " hide";
-    //alert("User info deleted successfully.")
     const opt = {
       method: "DELETE",
       headers: {
@@ -135,11 +134,7 @@ function deleteUser(id = ""){
       .then(data => {
         if(data.status == "OK"){
           shaveArray(id);
-          //console.log(classList)
           generateTable(classList);
-
-
-          //alert("User info deleted successfully.")
         }
         else{
           alert("Something went wrong.")
@@ -151,7 +146,6 @@ function deleteUser(id = ""){
     promptBox.className += " hide";
   }
   
-
   yesButton.addEventListener("click", prevYesListener)
   noButton.addEventListener("click", prevNoListener)
 }
@@ -175,15 +169,28 @@ function hide(id = ""){
 
 //This function deletes the user info corresponding to the _id of id from the classList array
 function shaveArray(id=""){
-  console.log(id)
   let newList = [];
   for(let list of classList){
-    console.log(list)
-    if(!list._id === id){
-      console.log(list)
+    if(list._id !== id){
       newList.push(list);
     }
   }
-  //console.log(newList)
+  
   classList = newList;
+
+  //sorts the classlist in alphabetical order
+  classList.sort((a, b) => {
+    let firstA = a.name.split("")[0]
+    let firstB = b.name.split("")[0]
+
+    if(firstA === firstB){
+      return 0
+    }
+    else if(firstA > firstB){
+      return 1
+    }
+    else{
+      return -1;
+    }
+  })
 }
