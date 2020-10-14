@@ -50,4 +50,10 @@ admin.get('/students', (request, response) => {
     response.send(document)
   })
 })
+
+//deletes a student's info from the database
+admin.delete('/student', (request, response) => {
+  response.send({status: "OK"})
+})
+
 module.exports = admin

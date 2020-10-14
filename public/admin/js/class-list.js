@@ -42,6 +42,13 @@ function generateTable(data = []) {
   //The variable representing the body of the table
   let tbody = document.getElementById("tbody");
 
+  //removes the former tbody
+  tbody.remove()
+
+  //creates a new tbody
+  tbody = document.createElement("tbody");
+  tbody.id="tbody";
+
   //a counter used to give each new row a unique id
 
   for(let row of data) {
@@ -85,6 +92,7 @@ function generateTable(data = []) {
     //appending the new row to the table body
     tbody.appendChild(newRow)
 
+    document.getElementsByTagName("table")[0].appendChild(tbody)
   }
 }
 
@@ -111,26 +119,33 @@ function deleteUser(id = ""){
   noButton.removeEventListener("click", prevNoListener)
 
   //creates new eventlisteners for the promptbox
-  // prevYesListener = (event) => {
-  //   promptBox.className += " hide";
-  //   //alert("User info deleted successfully.")
-  //   const opt = {
-  //     method: "DELETE",
-  //     headers: {
-  //       "Content-type": "application/json"
-  //     },
-  //     body: JSON.stringify({_id: id})
-  //   };
-  //   fetch('https://oztekoil-api.herokuapp.com/form', opt).then(response => response.json()).then(data => {
-  //     if(data.status == "OK"){
-  //       table.removeChild(toBeDeleted);
-  //       //alert("User info deleted successfully.")
-  //     }
-  //     else{
-  //       alert("Something went wrong.")
-  //     }
-  //   })
-  // }
+  prevYesListener = (event) => {
+    promptBox.className += " hide";
+    //alert("User info deleted successfully.")
+    const opt = {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify({_id: id})
+    };
+
+    fetch('/admin/student', opt)
+      .then(response => response.json())
+      .then(data => {
+        if(data.status == "OK"){
+          shaveArray(id);
+          //console.log(classList)
+          generateTable(classList);
+
+
+          //alert("User info deleted successfully.")
+        }
+        else{
+          alert("Something went wrong.")
+        }
+    })
+  }
 
   prevNoListener = (event) => {
     promptBox.className += " hide";
@@ -156,4 +171,19 @@ function hide(id = ""){
   if(!/^hide$/.test(element.className)){
     element.className = element.className + " hide"
   }
+}
+
+//This function deletes the user info corresponding to the _id of id from the classList array
+function shaveArray(id=""){
+  console.log(id)
+  let newList = [];
+  for(let list of classList){
+    console.log(list)
+    if(!list._id === id){
+      console.log(list)
+      newList.push(list);
+    }
+  }
+  //console.log(newList)
+  classList = newList;
 }
