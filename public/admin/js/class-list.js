@@ -88,6 +88,7 @@ function generateTable(data = []) {
     newRow.appendChild(mobile_number)
     newRow.appendChild(buttonTd)
 
+    newRow.addEventListener('click', (event) => {redirectToExams(button.id)})
 
     //appending the new row to the table body
     tbody.appendChild(newRow)
@@ -193,4 +194,8 @@ function shaveArray(id=""){
       return -1;
     }
   })
+}
+
+function redirectToExams(id = ""){
+  window.location.href = `./exam.html?${id}`
 }
