@@ -1,6 +1,10 @@
 //variable for saving the class list
 var classList = [];
 
+//event listeners for the confirmation prompt box that pops up when the admin wants to delete a student's info
+var prevYesListener = () => {}
+var prevNoListener = () => {}
+
 //fetches the class list from the server
 fetch('/admin/students')
   .then(response => response.json())
@@ -82,6 +86,59 @@ function generateTable(data = []) {
     tbody.appendChild(newRow)
 
   }
+}
+
+//This function deletes a particular user info
+function deleteUser(id = ""){
+  //row to be deleted
+  let toBeDeleted = document.getElementById("row" + id);
+  
+  //body of table
+  let tbody = document.getElementById("tbody");
+
+  //prompt box that gets confirmation from the admin to delete the user info
+  let promptBox = document.getElementById("prompt-box");
+
+  //displays the promptbox
+  promptBox.className = promptBox.className.replace('hide', '');
+
+  //buttons on the promptbox
+  let yesButton = document.getElementById('button-yes')
+  let noButton = document.getElementById('button-no')
+
+  //removes former event listeners of the promptbox
+  yesButton.removeEventListener("click", prevYesListener)
+  noButton.removeEventListener("click", prevNoListener)
+
+  //creates new eventlisteners for the promptbox
+  // prevYesListener = (event) => {
+  //   promptBox.className += " hide";
+  //   //alert("User info deleted successfully.")
+  //   const opt = {
+  //     method: "DELETE",
+  //     headers: {
+  //       "Content-type": "application/json"
+  //     },
+  //     body: JSON.stringify({_id: id})
+  //   };
+  //   fetch('https://oztekoil-api.herokuapp.com/form', opt).then(response => response.json()).then(data => {
+  //     if(data.status == "OK"){
+  //       table.removeChild(toBeDeleted);
+  //       //alert("User info deleted successfully.")
+  //     }
+  //     else{
+  //       alert("Something went wrong.")
+  //     }
+  //   })
+  // }
+
+  prevNoListener = (event) => {
+    promptBox.className += " hide";
+  }
+  
+
+  yesButton.addEventListener("click", prevYesListener)
+  noButton.addEventListener("click", prevNoListener)
 }
 
 

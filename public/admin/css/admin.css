@@ -58,3 +58,17 @@ body{
   z-index: 1000;
   color: white;
 }
+
+.prompt-box {
+  position: fixed;
+  top: 30%;
+  left: 35%;
+  width: 370px;
+  height: 200px;
+  background-color: rgb(15, 15, 15);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: rgb(61, 61, 61) 4px 4px 4px 4px;
+  cursor: pointer;
+  z-index: 1000;
+}
