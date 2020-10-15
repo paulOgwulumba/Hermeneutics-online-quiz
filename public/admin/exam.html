@@ -23,7 +23,7 @@
 
   <nav class="navbar navbar-expand-md navbar-dark bg-dark justify-content-end">
     <div class="container">
-      <a class ="navbar-brand" href ="#"> Admin Page </a>
+      <a class ="navbar-brand" href ="#"> Student Answer Sheet </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -41,9 +41,11 @@
     </div>
   </nav>
 
-  <div class="container">
-    <h4 class="display-5 text-center header-text" style="transform: translateY(2.5rem);">
-      Answer Sheet - <span class="text-info" id="student_name">Idiamin</span>
+  <!--Personal Info of student-->
+  <div class="container" id="student-info">
+    <h4 class="display-5 header-text" style="transform: translateY(2.5rem);">
+      Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong><span class="text-info" id="student_name">Idiamin</span></strong> <br>
+      <small>Student ID: &nbsp;&nbsp; <strong><span class="text-info" id="student_id">0908</span></strong></small>
     </h4>
     <p class="text-center text-muted student-info hide">
       Click on student's info to view more
@@ -52,14 +54,14 @@
 
 
   <div class="student-info hide" id="error-message">
-    <h4 class="display-5 text-warning text-center">
+    <h4 class="display-5 text-warning text-center" id="error-text">
       No response from server!!! &nbsp;
       Refresh the page
     </h4>
   </div>
 
 
-  <div class="container answer-sheet">
+  <div class="container answer-sheet" id="answer-sheet">
     <!--Question 1-->
     <p class="display-5 text-muted">
       <strong>1.</strong>&nbsp;&nbsp;&nbsp;Hermeneutics is needed because understanding of languages is a problematic activity. 
@@ -593,6 +595,6 @@
   <script src="../lib/popper/popper.min.js"></script>
   <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
 
-  
+  <script src="./js/exam.js"></script>
 </body>
 </html>
