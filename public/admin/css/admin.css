@@ -2,6 +2,10 @@ body{
   background-color: whitesmoke;
 }
 
+tr{
+  cursor: pointer;
+}
+
 .exam-container{
   padding: 3.4rem;
 }
