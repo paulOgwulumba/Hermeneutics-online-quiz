@@ -35,6 +35,9 @@
           <li class="nav-item active">
             <a href="./class-list.html" class="nav-link hvr-float"><small>Class List</small></a>
           </li>
+          <li class="nav-item active" style="float: right">
+            <a href="#" class="nav-link hvr-float" id="log-out"><small>Log Out</small></a>
+          </li>
         </ul>
       </div>
     </div>
@@ -44,33 +47,44 @@
     <h4 class="display-5 text-center header-text">
       Enter student information to add them to the class list
     </h4>
+    <p class="text-center hide" id="refresh-button" style="transform: translateY(6rem)">
+      <a href="./add-students.html" class="btn btn-large btn-outline-success">
+        Add another student
+      </a>
+
+    </p>
   </div>
 
   <div class="container">
-    <form role="form" class="student-info">
+    <form role="form" class="student-info" id="student-info-form">
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Full Name" id="name">
+        <small id="name-error" class="text-danger hide">*Field cannot be left empty</small>
       </div>
 
       <div class="form-group">
         <input type="number" class="form-control" placeholder="Student ID" id="student_id">
+        <small id="student_id-error" class="text-danger hide">*Field cannot be left empty</small>
       </div>
 
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Mobile Number" id="mobile_number">
+        <input type="number" class="form-control" placeholder="Mobile Number" id="mobile_number">
+        <small id="mobile_number-error" class="text-danger hide">*Field cannot be left empty</small>
       </div>
 
       <div class="form-group">
         <input type="email" class="form-control" placeholder="Email Address" id="email">
+        <small id="email-error" class="text-danger hide">*Field cannot be left empty</small>
       </div>
 
       <div class="form-group">
         <p class="text-center">
-          <button class="btn btn-outline-primary">Add student</button>
+          <button type="submit" class="btn btn-outline-primary">Add student</button>
         </p>
       </div>
     </form>
   </div>
+
 
 
   <!--Javascript files-->
@@ -78,5 +92,8 @@
   <script src="../lib/jquery/jquery-migrate.min.js"></script>
   <script src="../lib/popper/popper.min.js"></script>
   <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+
+  <script src="./js/add-students.js"></script>
+  <script src="./js/logout.js"></script>
 </body>
 </html>

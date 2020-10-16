@@ -1,5 +1,6 @@
 //Import express object
 const express = require('express');
+const session = require('express-session')
 
 //Import routers
 const adminRouter = require('./routers/admin');
@@ -11,7 +12,7 @@ const Datastore = require('nedb');
 require('dotenv').config({path: __dirname + '/.env'});
 
 //initialise database objects
-const student_base =  new Datastore({filename: 'student_base.db', autoload: true})
+//const student_base =  new Datastore({filename: 'db/student_base.db', autoload: true})
 
 //Initialise express object
 const server = express();
@@ -20,6 +21,7 @@ const server = express();
 server.use(express.json({limit: '2mb'}));
 server.use(express.static('public'));
 server.use('/admin', adminRouter)
+server.use(session({secret: "jets", saveUninitialized: true, resave: true}))
 
 //console.log(process.env.MY_NAME)
 

@@ -35,6 +35,10 @@
           <li class="nav-item">
             <a href="./class-list.html" class="nav-link"><small class="text-muted">Class List</small></a>
           </li>
+
+          <li class="nav-item active" style="float: right">
+            <a href="#" class="nav-link hvr-float" id="log-out"><small>Log Out</small></a>
+          </li>
         </ul>
       </div>
     </div>
@@ -44,9 +48,12 @@
     <h4 class="display-5 text-center header-text">
       Hermeneutics I Class List
     </h4>
+    <p class="text-center text-muted student-info">
+      Click on student's info to view more
+    </p>
   </div>
 
-  <div class="container">
+  <div class="container" id="table">
     <table class="student-info table table-bordered table-striped table-hover">
       <thead>
         <th>S/N</th>
@@ -56,32 +63,52 @@
         <th>Phone Number</th>
       </thead>
 
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Iheanyichukwu Mgbokwe</td>
-          <td>0890</td>
-          <td>something@somewhere.com</td>
-          <td>08149585413</td>
-          <td><button class="btn btn-outline-danger">Delete</button></td>
-        </tr>
-
-        <tr>
-          <td>2</td>
-          <td>Iheanyichukwu Mgbokwe</td>
-          <td>0890</td>
-          <td>something@somewhere.com</td>
-          <td>08149585413</td>
-        </tr>
+      <tbody id="tbody">
+        
       </tbody>
     </table>
   </div>
 
+  <div class="student-info hide" id="error-message">
+    <h4 class="display-5 text-warning text-center">
+      No response from server!!! &nbsp;
+      Refresh the page
+    </h4>
+  </div>
+
+  <div class="prompt-box hide" id="prompt-box">
+    <div class="row">
+      <div class="col-12">
+        <div class="prompt-heading" style="padding: 1rem; padding-bottom: none; padding-left: 2rem">
+          <p class="lead" style="color: white">Are you sure you want to delete this user info?</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-6">
+            <div class="button-1" style="padding: .5rem; padding-left: 3rem">
+              <button type="button" class="btn btn-outline-light" id="button-yes">Yes</button>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="button-2" style="padding: .5rem; padding-left: 3rem">
+              <button type="button" class="btn btn-outline-danger" id="button-no">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!--Javascript files-->
   <script src="../lib/jquery/jquery.min.js"></script>
   <script src="../lib/jquery/jquery-migrate.min.js"></script>
   <script src="../lib/popper/popper.min.js"></script>
   <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+
+  <script src="js/class-list.js"></script>
+  <script src="./js/logout.js"></script>
 </body>
 </html>

@@ -23,14 +23,13 @@ form.addEventListener("submit", (event) => {
       headers: {
         "Content-type": "application/json"
       },
-      body: JSON.stringify(obj)
+      body: JSON.stringify(obj),
     }
 
     //forwards the information to the server and handles the response appropriately
     fetch('/admin/log-in', options)
       .then(response => response.json())
       .then(data => {
-        console.log(data)
         if(data.status === "OK"){
           //redirects to admin page
           window.location.href = 'admin.html'
