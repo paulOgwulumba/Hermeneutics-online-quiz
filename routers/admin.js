@@ -2,6 +2,7 @@
 
 const { response } = require('express');
 const express = require('express');
+const session = require('express-session');
 const { request } = require('http');
 const admin = express.Router()
 const path = require('path')
@@ -13,9 +14,24 @@ const student_db = new Datastore({filename: path.join(__dirname, '..', 'db', 'st
 const answers_db = new Datastore({filename: path.join(__dirname, '..', 'db', 'answers_base.db'), autoload: true})
 const session_db = new Datastore({filename: path.join(__dirname, '..', 'db', 'session_base.db'), autoload: true})
 
+//set up session middleware
+admin.use(session({secret: "jets", saveUninitialized: true, resave: true}))
+//variable to track sessions with
+var sessionID;
+
 /*
   GET REQUESTS
 */
+//checks if session is open, if it is not, a redirect is triggered
+admin.get('/session', (request, response) => {
+  if(sessionID === request.session.id){
+    response.send({status: "OK"})
+  }
+  else{
+    response.send({status: "FAILED"})
+  }
+})
+
 //Sends the personal information of a student to the clientside
 admin.get('/student/:id', (request, response) => {
   let _id = request.params.id;
@@ -104,12 +120,16 @@ admin.get('/student/answer-sheet/:id', (request, response) => {
 */
 //validates the log in entries for the admin page
 admin.post('/log-in', (request, response) => {
+  console.log(request.session.name)
   if(request.body.username === process.env.ADMIN_USERNAME && request.body.password === process.env.ADMIN_PASSWORD){
     console.log(`Successful Admin log in confirmed. Time: ${new Date().toLocaleString()}`)
+    //creates a new session to be tracked
+    sessionID = request.session.id
+    
     response.send({status: "OK"})
   }
   else{
-    console.log(`Failed Admin log. Time: ${new Date().toLocaleString()}`)
+    console.log(`Failed Admin log in. Time: ${new Date().toLocaleString()}`)
     response.send({status: "FAILED"})
   }
 })

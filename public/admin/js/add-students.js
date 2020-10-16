@@ -1,5 +1,13 @@
 const form = document.getElementById("student-info-form");
 
+fetch('/admin/session')
+  .then(response => response.json())
+  .then(data => {
+    if(data.status !== "OK"){
+      window.location.href = "./index.html"
+    }
+  })
+
 form.addEventListener('submit', event => {
   event.preventDefault();
 

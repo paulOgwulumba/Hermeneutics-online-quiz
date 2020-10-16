@@ -1,5 +1,6 @@
 //Import express object
 const express = require('express');
+const session = require('express-session')
 
 //Import routers
 const adminRouter = require('./routers/admin');
@@ -20,6 +21,7 @@ const server = express();
 server.use(express.json({limit: '2mb'}));
 server.use(express.static('public'));
 server.use('/admin', adminRouter)
+server.use(session({secret: "jets", saveUninitialized: true, resave: true}))
 
 //console.log(process.env.MY_NAME)
 

@@ -54,6 +54,16 @@
     </p>
   </div>
 
+  <script>
+    fetch('/admin/session')
+      .then(response => response.json())
+      .then(data => {
+        if(data.status !== "OK"){
+          window.location.href = "./index.html"
+        }
+      })
+  </script>
+
   <!--Javascript files-->
   <script src="../lib/jquery/jquery.min.js"></script>
   <script src="../lib/jquery/jquery-migrate.min.js"></script>
