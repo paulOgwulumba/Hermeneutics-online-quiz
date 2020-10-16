@@ -67,7 +67,7 @@ admin.post('/student', (request, response) => {
       console.log(`New student added to student database. Time: ${new Date().toLocaleString()}`)
       
       //object to be added to answers database
-      let object = {_id: document._id}
+      let object = {_id: document._id, answers: {}}
 
       //object to hold answers to all the questions
       for(let i=1; i<=99; i++){
@@ -102,7 +102,7 @@ admin.post('/student', (request, response) => {
 
       session_db.insert(session_database, (error, docs) => {
         if(error) throw error
-        console.log(`New student answer database created successfully. Time: ${new Date().toLocaleString()}`)
+        console.log(`New student exam session database created successfully. Time: ${new Date().toLocaleString()}`)
       })
 
       response.send({status: "OK"})
@@ -132,12 +132,24 @@ admin.get('/students', (request, response) => {
 //deletes a student's info from the database
 admin.delete('/student', (request, response) => {
   try{
+    //delete student personal info
     student_db.remove({_id: request.body._id}, {}, (error, number) => {
       if(error) throw error
-      console.log(`${number} student info deleted successfully. Time: ${new Date().toLocaleString()}`)
-      response.send({status: "OK"})
+      console.log(`${number} student personal info deleted successfully. Time: ${new Date().toLocaleString()}`)
     })
-    
+
+    //delete student answer sheet
+    answers_db.remove({_id: request.body._id}, {}, (error, number) => {
+      if(error) throw error
+      console.log(`${number} student answer-sheet info deleted successfully. Time: ${new Date().toLocaleString()}`)
+    })
+
+    //delete student exam session state
+    session_db.remove({_id: request.body._id}, {}, (error, number) => {
+      if(error) throw error;
+      console.log(`${number} student exam session state deleted successfully. Time: ${new Date().toLocaleString()}`)
+    })
+    response.send({status: "OK"})
   }
   catch(error){
     console.error(error)

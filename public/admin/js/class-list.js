@@ -88,7 +88,12 @@ function generateTable(data = []) {
     newRow.appendChild(mobile_number)
     newRow.appendChild(buttonTd)
 
-    newRow.addEventListener('click', (event) => {redirectToExams(button.id)})
+    //triger redirect if student info is clicked on
+    s_n.addEventListener('click', (event) => {redirectToExams(button.id)})
+    name.addEventListener('click', (event) => {redirectToExams(button.id)})
+    student_id.addEventListener('click', (event) => {redirectToExams(button.id)})
+    email.addEventListener('click', (event) => {redirectToExams(button.id)})
+    mobile_number.addEventListener('click', (event) => {redirectToExams(button.id)})
 
     //appending the new row to the table body
     tbody.appendChild(newRow)
