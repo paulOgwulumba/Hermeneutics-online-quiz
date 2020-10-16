@@ -7,6 +7,8 @@ const { request } = require('http');
 const admin = express.Router()
 const path = require('path')
 require('dotenv').config({path: path.join(__dirname, '..', '.env')});
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 const Datastore = require('nedb');
 
@@ -16,6 +18,8 @@ const session_db = new Datastore({filename: path.join(__dirname, '..', 'db', 'se
 
 //set up session middleware
 admin.use(session({secret: "jets", saveUninitialized: true, resave: true}))
+//admin.use(bodyParser.urlencoded({extended: true}));
+//admin.use(cookieParser())
 //variable to track sessions with
 var sessionID;
 
@@ -120,12 +124,11 @@ admin.get('/student/answer-sheet/:id', (request, response) => {
 */
 //validates the log in entries for the admin page
 admin.post('/log-in', (request, response) => {
-  console.log(request.session.name)
+  console.log(request.session)
   if(request.body.username === process.env.ADMIN_USERNAME && request.body.password === process.env.ADMIN_PASSWORD){
     console.log(`Successful Admin log in confirmed. Time: ${new Date().toLocaleString()}`)
     //creates a new session to be tracked
     sessionID = request.session.id
-    
     response.send({status: "OK"})
   }
   else{

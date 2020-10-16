@@ -1,3 +1,12 @@
+//checks if session already exists, if not, a redirect to the log in page is triggered
+fetch('/admin/session')
+  .then(response => response.json())
+  .then(data => {
+    if(data.status !== "OK"){
+      window.location.href = "./index.html"
+    }
+  })
+
 //variable for saving the class list
 var classList = [];
 
