@@ -17,6 +17,8 @@ fetch(`/admin/student/${_id}`)
     else{
       document.getElementById("student_name").textContent = data.name 
       document.getElementById("student_id").textContent = data.student_id
+      fetchSessionStatus()
+      fetchAnswerSheet()
     }
   })
   .catch(e => {
@@ -28,6 +30,34 @@ fetch(`/admin/student/${_id}`)
   })
 
 
+//this function gets the exam session state of the student from the server using the student's database id
+function fetchSessionStatus(){
+  fetch(`/admin/student/session/${_id}`)
+    .then(response => response.json())
+    .then(data => {
+      let exam_status = data.exam_status
+      document.getElementById('exam_status').textContent = exam_status
+    })
+}
+
+//this function gets the exam answer sheet of the student from the server and displays it
+function fetchAnswerSheet(){
+  fetch(`/admin/student/answer-sheet/${_id}`)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      if('status' in data){}
+      else{
+        for(let i =1; i<100; i++){
+          document.getElementById(`answer-${i}`).textContent = data.answers[`question-${i}`]
+          if(document.getElementById(`answer-${i}`).textContent === "blank"){
+            //document.getElementById(`answer-${i}`).textContent = "_____"
+            document.getElementById(`answer-${i}`).className += " text-muted text-blurry"
+          }
+        }
+      }
+    })
+}
 
 
 //This function takes the id of an element and makes it appear on the screen if it isn't already on display

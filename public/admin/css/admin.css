@@ -40,7 +40,7 @@ tr{
 
 .student-info{
   z-index: 1000;
-  transform: translateY(6rem);
+  transform: translateY(4rem);
   padding-right: 20%;
   padding-left: 20%;
 }
@@ -85,8 +85,14 @@ tr{
   padding-left: 3rem;
   max-height: 30rem;
   overflow-y: scroll;
+  margin-bottom: 2rem;
 }
 
+
+.text-blurry{
+  color: gray;
+  opacity: 0.4;
+}
 /*Medium (md) devices (tablets, 768px and down) */
 @media (max-width: 992px) { 
   .answer-sheet {

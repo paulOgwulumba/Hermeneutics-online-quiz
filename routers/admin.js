@@ -13,18 +13,9 @@ const student_db = new Datastore({filename: path.join(__dirname, '..', 'db', 'st
 const answers_db = new Datastore({filename: path.join(__dirname, '..', 'db', 'answers_base.db'), autoload: true})
 const session_db = new Datastore({filename: path.join(__dirname, '..', 'db', 'session_base.db'), autoload: true})
 
-//validates the log in entries for the admin page
-admin.post('/log-in', (request, response) => {
-  if(request.body.username === process.env.ADMIN_USERNAME && request.body.password === process.env.ADMIN_PASSWORD){
-    console.log(`Successful Admin log in confirmed. Time: ${new Date().toLocaleString()}`)
-    response.send({status: "OK"})
-  }
-  else{
-    console.log(`Failed Admin log. Time: ${new Date().toLocaleString()}`)
-    response.send({status: "FAILED"})
-  }
-})
-
+/*
+  GET REQUESTS
+*/
 //Sends the personal information of a student to the clientside
 admin.get('/student/:id', (request, response) => {
   let _id = request.params.id;
@@ -45,6 +36,81 @@ admin.get('/student/:id', (request, response) => {
     console.log(`Student information attempted to be extracted from database but failed because of database error. Time: ${new Date().toLocaleString()}`);
     console.error(error)
     response.status(404).send({status: "FAILED"})
+  }
+})
+
+//Sends the class list to the clientside
+admin.get('/students', (request, response) => {
+  try{
+    student_db.find({}, (error, document)=> {
+      if(error) throw error;
+      console.log(`Student info sent to clientside. Time: ${new Date().toLocaleString()}`)
+      response.send(document)
+    })
+  }
+  catch(error){
+    console.error(error)
+  }
+})
+
+//sends a student's exam session state to the clientside
+admin.get('/student/session/:id', (request, response) => {
+  let _id = request.params.id;
+  try{
+    session_db.findOne({_id: _id}, (error, document) => {
+      if(error) throw error
+      if(document !== null & document !== undefined){
+        console.log(`Student exam session info sent to clientside. Time: ${new Date().toLocaleString()}`);
+        response.send(document)
+      }
+      else{
+        console.log(`Student exam session info attempted to be extracted from database but failed because no information matching given ID was found. Time: ${new Date().toLocaleString()}`);
+        response.status(404).send({status: "FAILED"})
+      }
+    })
+  }
+  catch(error){
+    console.log(`Student exam session info attempted to be extracted from database but failed because of database error. Time: ${new Date().toLocaleString()}`);
+    console.error(error)
+    response.status(404).send({status: "FAILED"})
+  }
+})
+
+//sends a student's exam answer sheet to the clientside
+admin.get('/student/answer-sheet/:id', (request, response) => {
+  let _id = request.params.id;
+  try{
+    answers_db.findOne({_id: _id}, (error, document) => {
+      if(error) throw error
+      if(document !== null & document !== undefined){
+        console.log(`Student answer sheet sent to clientside. Time: ${new Date().toLocaleString()}`);
+        response.send(document)
+      }
+      else{
+        console.log(`Student answer sheet attempted to be extracted from database but failed because no information matching given ID was found. Time: ${new Date().toLocaleString()}`);
+        response.status(404).send({status: "FAILED"})
+      }
+    })
+  }
+  catch(error){
+    console.log(`Student answer sheet attempted to be extracted from database but failed because of database error. Time: ${new Date().toLocaleString()}`);
+    console.error(error)
+    response.status(404).send({status: "FAILED"})
+  }
+})
+
+/*
+  POST REQUESTS
+*/
+//validates the log in entries for the admin page
+admin.post('/log-in', (request, response) => {
+  if(request.body.username === process.env.ADMIN_USERNAME && request.body.password === process.env.ADMIN_PASSWORD){
+    console.log(`Successful Admin log in confirmed. Time: ${new Date().toLocaleString()}`)
+    response.send({status: "OK"})
+  }
+  else{
+    console.log(`Failed Admin log. Time: ${new Date().toLocaleString()}`)
+    response.send({status: "FAILED"})
   }
 })
 
@@ -115,20 +181,10 @@ admin.post('/student', (request, response) => {
   }
 })
 
-//Sends the class list to the clientside
-admin.get('/students', (request, response) => {
-  try{
-    student_db.find({}, (error, document)=> {
-      if(error) throw error;
-      console.log(`Student info sent to clientside. Time: ${new Date().toLocaleString()}`)
-      response.send(document)
-    })
-  }
-  catch(error){
-    console.error(error)
-  }
-})
 
+/*
+  DELETE REQUESTS
+*/
 //deletes a student's info from the database
 admin.delete('/student', (request, response) => {
   try{
