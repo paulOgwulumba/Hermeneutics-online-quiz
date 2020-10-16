@@ -36,6 +36,19 @@ admin.get('/session', (request, response) => {
   }
 })
 
+//cancels present session and redirect to log in page is triggered
+admin.get('/log-out', (request, response) => {
+  request.session.destroy( error => {
+    if(error){
+      console.error(error)
+      console.log(`Admin log out failed. Time: ${new Date().toLocaleString()}`)
+      response.send({status: "FAILED"})
+    }
+    console.log(`Successful Admin log out confirmed. Time: ${new Date().toLocaleString()}`)
+    response.send({status: "OK"})
+  })
+})
+
 //Sends the personal information of a student to the clientside
 admin.get('/student/:id', (request, response) => {
   let _id = request.params.id;
@@ -124,7 +137,6 @@ admin.get('/student/answer-sheet/:id', (request, response) => {
 */
 //validates the log in entries for the admin page
 admin.post('/log-in', (request, response) => {
-  console.log(request.session)
   if(request.body.username === process.env.ADMIN_USERNAME && request.body.password === process.env.ADMIN_PASSWORD){
     console.log(`Successful Admin log in confirmed. Time: ${new Date().toLocaleString()}`)
     //creates a new session to be tracked
