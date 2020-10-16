@@ -10,6 +10,9 @@ require('dotenv').config({path: path.join(__dirname, '..', '.env')});
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
+//crypto module for hashing strings
+const SHA256 = require('crypto-js/sha256');
+
 const Datastore = require('nedb');
 
 const student_db = new Datastore({filename: path.join(__dirname, '..', 'db', 'student_base.db'), autoload: true},)
@@ -153,6 +156,18 @@ admin.post('/log-in', (request, response) => {
 admin.post('/student', (request, response) => {
   let obj = request.body;
   let objKeys = Object.keys(obj)
+  
+  //string to be hashed to form student unique password
+  let toBeHashed = ""
+  let nameArray = obj.name.split(' ')
+  for(let name of nameArray){
+    toBeHashed = toBeHashed + name.substr(0, 2);
+  }
+  toBeHashed = toBeHashed + obj.student_id.substr(0, 2);
+  toBeHashed = toBeHashed + obj.email.substr(0, 2);
+  toBeHashed = toBeHashed + obj.mobile_number.substr(0, 2);
+
+  obj.password = SHA256(toBeHashed).toString().substr(0, 10);
 
   //Checks for any empty field
   for(let key of objKeys){

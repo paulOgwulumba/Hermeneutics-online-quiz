@@ -1,0 +1,2755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hermeneutics Exam</title>
+
+  <!--Bootstrap CSS File-->
+  <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.min.css">
+
+  <!--Font-Awesome CSS File-->
+  <link rel="stylesheet" href="./lib/font-awesome/css/font-awesome.min.css">
+
+  <!--Hover CSS-->
+  <link rel="stylesheet" href="./css/hover.css">
+
+  <!--Stylesheet-->
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+
+  <div class="overlay-mf"></div>
+  
+
+  <!--Navbar-->
+  <nav class ="navbar navbar-dark bg-dark">
+    <a class ="navbar-brand" href ="#" id="tester"> Hermeneutics Online Exam </a>
+    <div class="timer hide" id="timer">
+      <p class="text-light">
+        <span id="hours">02</span>: <span id="minutes">00</span> : <span id="seconds">00</span>
+      </p>
+    </div>
+    <div class ="collapse navbar-collapse justify-content-end" id ="colNav">
+    </div>
+  </nav>
+
+  <!--Question Box (True or False)-->
+  <div class="container hide">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 25</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            What is the title of the 66th book of the Bible?
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="gender" value="male" id="gender">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="gender" value="female" id="gender">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!--Log in-->
+  <div class="container" id="display-log-in">
+    <div class="exam-container" style="padding: 2rem">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p class="text-center display-6">Enter your log in details</p>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <input type="text" class="form-control" id="student-id" placeholder="Student ID">
+            </div>
+            <div class="form-group" style="padding: 0rem">
+              <input type="password" class="form-control" id="password" placeholder="Password">
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button class="btn btn-outline-light hvr-grow" id="log-in-button">Log in</button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!--Instructions-->
+  <div class="container hide" id="display-0">
+    <div class="row instructions">
+      <div class="col-12">
+        <h4 class="text-center display-6">
+          Read the following instructions carefully before you proceed.
+        </h4>
+        <p class="">
+          This exam consists of <strong>99</strong> questions to be answered within a duration of exactly <strong>2 hours</strong>. <br>
+          39 questions are "<strong>Multi-choice</strong>" comprising of either a <strong>True</strong> or a <strong>False</strong> option. <br>
+          60 questions are "<strong>Fill in the blank</strong>" where spaces are provided for you to type in your answers. <br>
+          Make sure you type your answers into the appropriate space for each question. <br>
+          If you are done before 2 hours elapse, click on the <strong>Submit Exam</strong> button to submit your answers. <br>
+          <span class="text-danger">Do not click on <strong>Submit Exam</strong> till you are sure you are done with your exam!!!</span> <br>
+          If the time elapses before you finish, your answers will be submitted automatically. <br>
+          Click on the <strong>Start Exam</strong> button below to start. <br>
+          Good luck and may God be with you.
+        </p>
+        <p class="text-center">
+          <button id="start-exam" class="btn btn-lg btn-outline-light">Start Exam</button>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!--Question type-->
+  <div class="container hide" id="question-type-box">
+    <div class="row">
+      <div class="col-12">
+        <div class="question-type">
+          <p id="question-type">
+            Multi-choice
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Submit exam button-->
+  <div class="submit-exam-box hide" id="submit-exam-box">
+    <button class="btn btn-lg btn-outline-danger" id="submit-exam">Submit Exam</button>
+  </div>
+
+  <!-- Question 1 -->
+  <div class="container hide" id="display-1">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 1</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            Hermeneutics is needed because understanding of languages is a problematic activity.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="1" value="true" id="question-1">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="1" value="false" id="question-1">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button disabled id="previous-1" class="btn btn-info"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-1" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 2 -->
+  <div class="container hide" id="display-2">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 2</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            There are numerable divisions to the study of hermeneutics.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="2" value="true" id="question-2">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="2" value="false" id="question-2">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-2" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-2" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 3 -->
+  <div class="container hide" id="display-3">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 3</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            The history of biblical interpretations began at unknown point in time.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="3" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="3" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-3" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-3" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 4 -->
+  <div class="container hide" id="display-4">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 4</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            Allegory simply means an extended metaphor.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="4" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="4" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-4" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-4" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 5 -->
+  <div class="container hide" id="display-5">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 5</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            Allegorism was bequeathed to the Christian Church by Alexandrian Jews. 
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="5" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="5" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-5" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-5" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 6 -->
+  <div class="container hide" id="display-6">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 6</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            The early Christian Fathers had as their Bible the Old Testament in Greek translation.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="6" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="6" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-6" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-6" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 7 -->
+  <div class="container hide" id="display-7">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 7</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            The curse of allegorical method is that it observes the true meaning of the word of God.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="7" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="7" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-7" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-7" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 8 -->
+  <div class="container hide" id="display-8">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 8</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            Origen taught that we escape Judaism by spiritualizing the Old Testament.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="8" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="8" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-8" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-8" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 9 -->
+  <div class="container hide" id="display-9">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 9</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            Jerome was first to translate the Bible into Latin.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="9" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="9" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-9" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-9" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 10 -->
+  <div class="container hide" id="display-10">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 10</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            The two major controlling principles in Augustine hermeneutics are love and analogy of faith.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="10" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="10" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-10" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-10" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!---->
+  <!-- Question 11 -->
+  <div class="container hide" id="display-11">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 11</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            The Catholic Church taught that the average man’s task was the correct interpretation of the Bible. 
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="11" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="11" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-11" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-11" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 12 -->
+  <div class="container hide" id="display-12">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 12</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            Nehemiah is considered the first of the Jewish interpreters.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="12" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="12" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-12" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-12" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 13 -->
+  <div class="container hide" id="display-13">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 13</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            The first protestant school of hermeneutics was located in the city of Antioch of Pisdia.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="13" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="13" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-13" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-13" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 14 -->
+  <div class="container hide" id="display-14">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 14</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            Hugo and Andrew were the only outstanding scholars of the medieval period.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="14" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="14" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-14" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-14" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 15 -->
+  <div class="container hide" id="display-15">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 15</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            The Victorines insisted that the true interpretation must involve eisegesis and exegesis.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="15" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="15" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-15" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-15" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 16 -->
+  <div class="container hide" id="display-16">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 16</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            Hermeneutics is another name for proclaiming, translating and explaining.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="16" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="16" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-16" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-16" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 17 -->
+  <div class="container hide" id="display-17">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 17</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            Hermeneutics proper is not exegesis, but exegesis is applied hermeneutics.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="17" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="17" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-17" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-17" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 18 -->
+  <div class="container hide" id="display-18">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 18</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            For Clement of Alexandria, taking a story in the Old Testament as an actual 
+            event is the historical sense of scripture.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="18" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="18" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-18" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-18" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 19 -->
+  <div class="container hide" id="display-19">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 19</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            Jerome developed a handwork of hermeneutics and homiletics called “De Doctrina Christiana”.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="19" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="19" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-19" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-19" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 20 -->
+  <div class="container hide" id="display-20">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 20</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            Karaites and Cabbaalists were developed by Catholic allegorism.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="20" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="20" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-20" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-20" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 21 -->
+  <div class="container hide" id="display-21">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 21</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            Augustine taught that faith and illumination were the personal and spiritual requisites for an interpreter.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="21" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="21" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-21" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-21" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 22 -->
+  <div class="container hide" id="display-22">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 22</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            Calvin said this, “I ask for scripture and ECK offers me the fathers”.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="22" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="22" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-22" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-22" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 23 -->
+  <div class="container hide" id="display-23">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 23</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            Luther’s basic convention was, “Scripture interprets scripture.”	
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="23" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="23" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-23" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-23" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 24 -->
+  <div class="container hide" id="display-24">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 24</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            The puritans worked out the Protestant hermeneutics.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="24" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="24" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-24" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-24" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 25 -->
+  <div class="container hide" id="display-25">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 25</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            All forms of genuine inspiration are rejected by modern emphasis.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="25" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="25" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-25" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-25" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 26 -->
+  <div class="container hide" id="display-26">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 26</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            Realism means that whatever is not in harmony with educated mentality must be rejected.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="26" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="26" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-26" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-26" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 27 -->
+  <div class="container hide" id="display-27">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 27</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            Hegel maintained that progress in the clarification of an idea involves the thesis, antithesis and synthesis.	
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="27" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="27" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-27" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-27" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 28 -->
+  <div class="container hide" id="display-28">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 28</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            “Romerbrief” was the making of Kerl Barth.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="28" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="28" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-28" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-28" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 29 -->
+  <div class="container hide" id="display-29">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 29</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            Biblical Realism concerns itself with rediscovering the theological interpretation of the Bible.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="29" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="29" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-29" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-29" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 30 -->
+  <div class="container hide" id="display-30">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 30</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            Mythology rejects the creation of man, the innocence of man, the fall of man and the second coming of Christ.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="30" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="30" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-30" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-30" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 31 -->
+  <div class="container hide" id="display-31">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 31</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            Von Hoffman insists that historical events had roots in the past, meaning in the present and portent for the future.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="31" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="31" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-31" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-31" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 32 -->
+  <div class="container hide" id="display-32">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 32</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            Bultman taught that all historical statements should be accepted whether verified or not.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="32" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="32" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-32" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-32" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 33 -->
+  <div class="container hide" id="display-33">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 33</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            Bultman as well believed that the Old Testament is a “Christian” book.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="33" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="33" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-33" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-33" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 34 -->
+  <div class="container hide" id="display-34">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 34</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            New Hermeneutics is the brain child of the liberals.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="34" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="34" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-34" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-34" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 35 -->
+  <div class="container hide" id="display-35">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 35</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            Though Augustine contributed much to biblical hermeneutics, he came short in so many instances.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="35" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="35" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-35" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-35" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!--Question 36 & 37-->
+  <div class="container hide" id="display-36">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 36 & 37</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            Hermeneutics is both:
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="36" cols="30" rows="1" placeholder="36."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="" class="control-label offset-1">and</label>
+            </div>
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="37" cols="30" rows="1" placeholder="37."></textarea>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-36" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-36" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!--Question 38 & 39-->
+  <div class="container hide" id="display-37">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 38 & 39</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            These are two reasons why we need Hermeneutics:
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="38" cols="30" rows="1" placeholder="38."></textarea>
+            </div>
+            
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="39" cols="30" rows="1" placeholder="39."></textarea>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-37" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-37" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!--Question 40 & 41-->
+  <div class="container hide" id="display-38">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 40 & 41</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            The following two (2) things must be avoided in Bible interpretation: 
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="40" cols="30" rows="1" placeholder="40."></textarea>
+            </div>
+            
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="41" cols="30" rows="1" placeholder="41."></textarea>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-38" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-38" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!--Question 42, 43 & 44-->
+  <div class="container hide" id="display-39">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 42, 43 & 44</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            A Jewish allegorist must interpret the scriptures allegorically for the following three (3) reasons: 
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="42" cols="30" rows="1" placeholder="42."></textarea>
+            </div>
+            
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="43" cols="30" rows="1" placeholder="43."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="44" cols="30" rows="1" placeholder="44."></textarea>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-39" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-39" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!--Question 45-->
+  <div class="container hide" id="display-40">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 45</p>
+        </div>
+        <div class="col-11 question-text">
+          <p> 
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group form-inline" style="padding: 0rem">
+              <textarea class="form-control col-lg-3" name="" id="45" cols="30" rows="1" placeholder=""></textarea>
+              &nbsp;&nbsp;was a great Bible scholar in terms of scholarship of antiquity.
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-40" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-40" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!--Question 46-->
+  <div class="container hide" id="display-41">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 46</p>
+        </div>
+        <div class="col-11 question-text">
+          <p> 
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group form-inline" style="padding: 0rem">
+              <textarea class="form-control col-lg-3" name="" id="46" cols="30" rows="1" placeholder=""></textarea>
+              &nbsp;&nbsp;taught that “the obscure passage must yield to the clear passage.”
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-41" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-41" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!--Question 47, 48 & 49-->
+  <div class="container hide" id="display-42">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 47, 48 & 49</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            When the Catholic Church insisted that the official interpreter of scripture was the church, 
+            she meant the following three (3) things: 
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="47" cols="30" rows="1" placeholder="47."></textarea>
+            </div>
+            
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="48" cols="30" rows="1" placeholder="48."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="49" cols="30" rows="1" placeholder="49."></textarea>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-42" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-42" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!--Question 50, 51 & 52-->
+  <div class="container hide" id="display-43">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 50, 51 & 52</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            These were the 3 outstanding scholars of the medieval period: 
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="50" cols="30" rows="1" placeholder="50."></textarea>
+            </div>
+            
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="51" cols="30" rows="1" placeholder="51."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="52" cols="30" rows="1" placeholder="52."></textarea>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-43" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-43" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!--Question 53 to 59-->
+  <div class="container hide" id="display-44">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 53 to 59</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            The following are Luther’s Hermeneutic principles:
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="53" cols="30" rows="1" placeholder="53."></textarea>
+            </div>
+            
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="54" cols="30" rows="1" placeholder="54."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="55" cols="30" rows="1" placeholder="55."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="56" cols="30" rows="1" placeholder="56."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="57" cols="30" rows="1" placeholder="57."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="58" cols="30" rows="1" placeholder="58."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="59" cols="30" rows="1" placeholder="59."></textarea>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-44" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-44" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!--Question 60 & 61-->
+  <div class="container hide" id="display-45">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 60 & 61</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            The debate over the Bible in modern times is a debate of
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="60" cols="30" rows="1" placeholder="60."></textarea>
+            </div>
+            
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="61" cols="30" rows="1" placeholder="61."></textarea>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-45" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-45" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!--Question 62 to 69-->
+  <div class="container hide" id="display-46">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 62 to 69</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            The new movement for the theological interpretation of the book of Romans initiated by 
+            Barth has the following 8 different names.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="62" cols="30" rows="1" placeholder="62."></textarea>
+            </div>
+            
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="63" cols="30" rows="1" placeholder="63."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="64" cols="30" rows="1" placeholder="64."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="65" cols="30" rows="1" placeholder="65."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="66" cols="30" rows="1" placeholder="66."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="67" cols="30" rows="1" placeholder="67."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="68" cols="30" rows="1" placeholder="68."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="69" cols="30" rows="1" placeholder="69."></textarea>
+            </div>
+
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-46" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-46" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!--Question 70 to 73-->
+  <div class="container hide" id="display-47">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 70 to 73</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            The four (4) men that gave us a clearer picture of the Patristic Hermeneutical Theory are:
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="70" cols="30" rows="1" placeholder="70."></textarea>
+            </div>
+            
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="71" cols="30" rows="1" placeholder="71."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="72" cols="30" rows="1" placeholder="72."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="73" cols="30" rows="1" placeholder="73."></textarea>
+            </div>
+
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-47" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-47" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!--Question 74, 75 & 76-->
+  <div class="container hide" id="display-48">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 74, 75 & 76</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            Triana suggests three (3) major phases of interpretation, which are:
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="74" cols="30" rows="1" placeholder="74."></textarea>
+            </div>
+            
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="75" cols="30" rows="1" placeholder="75."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="76" cols="30" rows="1" placeholder="76."></textarea>
+            </div>
+
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-48" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-48" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!--Question 77 to 85-->
+  <div class="container hide" id="display-49">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 77 to 85</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            According to Triana, the nine (9) various structural units are the followings:
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="77" cols="30" rows="1" placeholder="77."></textarea>
+            </div>
+            
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="78" cols="30" rows="1" placeholder="78."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="79" cols="30" rows="1" placeholder="79."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="80" cols="30" rows="1" placeholder="80."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="81" cols="30" rows="1" placeholder="81."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="82" cols="30" rows="1" placeholder="82."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="83" cols="30" rows="1" placeholder="83."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="84" cols="30" rows="1" placeholder="84."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="85" cols="30" rows="1" placeholder="85."></textarea>
+            </div>
+
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-49" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-49" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!--Question 86 to 91-->
+  <div class="container hide" id="display-50">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 86 to 91</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            The six (9) initial guidelines that should be adhered to by Christian interpreters to 
+            be able to understand the relationship between the Christian and the Old Testament law are:
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="86" cols="30" rows="1" placeholder="86."></textarea>
+            </div>
+            
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="87" cols="30" rows="1" placeholder="87."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="88" cols="30" rows="1" placeholder="88."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="89" cols="30" rows="1" placeholder="89."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="90" cols="30" rows="1" placeholder="90."></textarea>
+            </div>
+
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="91" cols="30" rows="1" placeholder="91."></textarea>
+            </div>
+
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-50" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-50" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!--Question 92 & 93-->
+  <div class="container hide" id="display-51">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 92 & 93</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            The two (2) kinds of parables taught by Fee and Stuart are:
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="92" cols="30" rows="1" placeholder="92."></textarea>
+            </div>
+            
+            <div class="form-group" style="padding: 0rem">
+              <textarea class="form-control" name="" id="93" cols="30" rows="1" placeholder="93."></textarea>
+            </div>
+
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-51" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-51" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!--Question 94-->
+  <div class="container hide" id="display-52">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 94</p>
+        </div>
+        <div class="col-11 question-text">
+          <p> 
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group form-inline" style="padding: 0rem">
+              <textarea class="form-control col-lg-3" name="" id="94" cols="30" rows="1" placeholder=""></textarea>
+              &nbsp;&nbsp;is the act or result of considering or marking attentively.
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-52" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-52" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!--Question 95-->
+  <div class="container hide" id="display-53">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 95</p>
+        </div>
+        <div class="col-11 question-text">
+          <p> 
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group form-inline" style="padding: 0rem">
+              <textarea class="form-control col-lg-3" name="" id="95" cols="30" rows="1" placeholder=""></textarea>
+              &nbsp;&nbsp;are stories retelling the historical events of the past which are intended to give meaning 
+              and direction for a given people in the present.
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-53" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-53" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 96 -->
+  <div class="container hide" id="display-54">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 96</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            The assimilation of scriptural truth is that which makes Bible study worthwile.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="96" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="96" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-54" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-54" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 97 -->
+  <div class="container hide" id="display-55">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 97</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            According to Fee and Stuart, the epistles are a homogenous lot.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="97" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="97" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-55" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-55" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 98 -->
+  <div class="container hide" id="display-56">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 98</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            The single most common type of literature in the Bible is the narrative.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="98" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="98" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-56" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-56" class="btn btn-info hvr-grow">Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <!-- Question 99 -->
+  <div class="container hide" id="display-57">
+    <div class="exam-container">
+      <div class="row">
+        <div class="col-12 question-number">
+          <p>Question 99</p>
+        </div>
+        <div class="col-11 question-text">
+          <p>
+            Methodical Bible Study always concerns itself with the proper path to be taken 
+            in order to arrive at scriptural truth.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <form action="" id="form">
+            <div class="form-group" style="padding: 0rem">
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="99" value="true">
+                <label class="form-check-label" for="defaultCheck1">
+                  &nbsp;&nbsp;&nbsp;&nbsp;True
+                </label>
+              </div>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <div class="form-check col-2">
+                <input class="form-check-input" type="radio" name="99" value="false">
+                <label class="form-check-label" for="defaultCheck2">
+                  &nbsp;&nbsp;&nbsp;&nbsp;False
+                </label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <p class="text-center">
+                <button id="previous-57" class="btn btn-info hvr-grow"><span class="fa fa-arrow-circle-left"></span>Prev. Question</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button id="next-57" class="btn btn-info" disabled>Next Question<span class="fa fa-arrow-circle-right"></span></button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  
+
+  <!--Javascript files-->
+  <script src="./lib/jquery/jquery.min.js"></script>
+  <script src="./lib/jquery/jquery-migrate.min.js"></script>
+  <script src="./lib/popper/popper.min.js"></script>
+  <script src="./lib/bootstrap/js/bootstrap.min.js"></script>
+
+  <script src="./js/main.js"></script>
+</body>
+</html>
