@@ -1,3 +1,5 @@
+fetch('/student/session')
+
 //The number of question sections to be displayed one after the other
 const numberOfSections = 100;
 
@@ -81,57 +83,7 @@ logIn.addEventListener("click", (event) => {
   hide('display-log-in')
 })
 
-// const btn = document.getElementById("end")
-// btn.addEventListener("click", (event) => {
-//   event.preventDefault()
 
-//   timer = startTimer()
-
-//   let answers = {}
-//   for(let i=1; i<=35; i++){
-//     let elem;
-//     let things = document.getElementsByName(i)
-
-//     for(let thing of things){
-//       if(thing.checked === true){
-//         elem = thing;
-//       }
-//     }
-
-//     if(elem == undefined){
-//       answers["question-" + i] = "blank";
-//     }
-//     else{
-//       answers["question-" + i] = elem.value;
-//     }
-//   }
-
-//   for(let i=36; i<=95; i++){
-//     let elem = document.getElementById(i);
-//     let answer = elem.value === ""? "blank" : elem.value;
-//     answers["question-" + i] = answer;
-//   }
-
-//   for(let i=96; i<=99; i++){
-//     let elem;
-//     let things = document.getElementsByName(i)
-
-//     for(let thing of things){
-//       if(thing.checked === true){
-//         elem = thing;
-//       }
-//     }
-
-//     if(elem == undefined){
-//       answers["question-" + i] = "blank";
-//     }
-//     else{
-//       answers["question-" + i] = elem.value;
-//     }
-//   }
-
-//   console.log(answers)
-// })
 
 //this starts the exam
 const startExam = document.getElementById("start-exam")

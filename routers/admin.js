@@ -6,18 +6,19 @@ const session = require('express-session');
 const { request } = require('http');
 const admin = express.Router()
 const path = require('path')
-require('dotenv').config({path: path.join(__dirname, '..', '.env')});
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+
+require('dotenv').config({path: path.join(__dirname, '..', '.env')});
 
 //crypto module for hashing strings
 const SHA256 = require('crypto-js/sha256');
 
 const Datastore = require('nedb');
 
-const student_db = new Datastore({filename: path.join(__dirname, '..', 'db', 'student_base.db'), autoload: true},)
-const answers_db = new Datastore({filename: path.join(__dirname, '..', 'db', 'answers_base.db'), autoload: true})
-const session_db = new Datastore({filename: path.join(__dirname, '..', 'db', 'session_base.db'), autoload: true})
+const student_db = require('../database_objects/student_db')
+const answers_db = require('../database_objects/answers_db')
+const session_db = require('../database_objects/session_db')
 
 //set up session middleware
 admin.use(session({secret: "jets", saveUninitialized: true, resave: true}))
