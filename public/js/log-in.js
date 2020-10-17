@@ -1,4 +1,4 @@
-fetch('/student/session')
+
 
 const form = document.getElementById("form")
 

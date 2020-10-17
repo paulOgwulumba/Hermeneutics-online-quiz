@@ -1,4 +1,10 @@
 fetch('/student/session')
+  .then(response => response.json())
+  .then(data => {
+    if(data.status !== "OK"){
+      window.location.href('./index.html')
+    }
+  })
 
 //The number of question sections to be displayed one after the other
 const numberOfSections = 100;
