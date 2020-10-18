@@ -1,8 +1,10 @@
+//Checks if the student is already logged in. If yes, session continues, if not, session is cancelled
+//and the student is redirected to the log in page
 fetch('/student/session')
   .then(response => response.json())
   .then(data => {
-    if(data.status !== "OK"){
-      window.location.href('./index.html')
+    if(data.status === "LOG OUT"){
+      window.location.href = './index.html'
     }
   })
 
@@ -15,7 +17,7 @@ var time = 7200;
 //id for the timer handling the exam duration 
 var timer;
 
-//answersect that holds all the buttons attached to each question section
+//object that holds all the buttons attached to each question section
 var button = {}
 
 //This handles the previous and next buttons used to toggle between questions
@@ -60,40 +62,13 @@ for(let i=1; i<=numberOfSections; i++){
 
 }
 
-//This function takes the id of any element and then makes it disappear from the screen if it is on display already
-function hide(id = ""){
-  let element = document.getElementById(id);
-  if(!/^hide$/.test(element.className)){
-    element.className = element.className + " hide"
-  }
-}
-
-//This function takes the id of an element and makes it appear on the screen if it isn't already on display
-function show(id = ""){
-  let element = document.getElementById(id);
-  //console.log("id:" + id)
-  if(/\shide$/.test(element.className)){
-    element.className = element.className.replace("hide", "")
-  }
-  else{
-    // console.log(id)
-    // console.log("Hellos")
-  }
-}
-
-//This button handles the user log in
-const logIn = document.getElementById('log-in-button')
-logIn.addEventListener("click", (event) => {
-  event.preventDefault();
-  show('display-0')
-  hide('display-log-in')
-})
-
-
-
 //this starts the exam
 const startExam = document.getElementById("start-exam")
 startExam.addEventListener("click", (event) => {
+  isAnotherLoggedIn()
+    .then(logOut => {
+      console.log(logOut)
+    })
   event.preventDefault();
   timer = startTimer()
   hide('display-0')
@@ -230,4 +205,52 @@ function displayAnswers(object = {secondsLeft: 0, answers: {}}){
       }
     }
   }
+}
+
+//This function takes the id of any element and then makes it disappear from the screen if it is on display already
+function hide(id = ""){
+  let element = document.getElementById(id);
+  if(!/^hide$/.test(element.className)){
+    element.className = element.className + " hide"
+  }
+}
+
+//This function takes the id of an element and makes it appear on the screen if it isn't already on display
+function show(id = ""){
+  let element = document.getElementById(id);
+  //console.log("id:" + id)
+  if(/\shide$/.test(element.className)){
+    element.className = element.className.replace("hide", "")
+  }
+  else{
+    // console.log(id)
+    // console.log("Hellos")
+  }
+}
+
+async function isAnotherLoggedIn(){
+  let toBeReturned;
+  await fetch('/student/login-status')
+    .then(response => response.json())
+    .then(data => {
+      if(data.status === "FAILED"){
+        console.log("Another is logged in")
+        return true;
+      }
+      else if(data.status === "LOG OUT"){        //runs routine check to see if student is indeed logged in
+        window.location.href = "./index.html"
+      }
+      else{
+        console.log("No impostor found.")
+        return false;
+      }
+    })
+    .catch(e => {
+      console.log("No response from server")
+      return false
+    })
+    .then(logout => {
+       toBeReturned = logout;
+    })
+  return toBeReturned;
 }
