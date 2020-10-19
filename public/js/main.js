@@ -7,10 +7,11 @@ fetch('/student/session')
     if(data.status === "LOG OUT"){
       window.location.href = './index.html'
     }
-    //EXAM ALREADY TAKEN, LOG STUDENT OUT
+    //EXAM ALREADY TAKEN
     else if(data.status === "TAKEN"){
-      alert("Exam already taken!")
-      window.location.href = './index.html'
+      hide("display-0")
+      show(`display-success`)
+      document.getElementById("success-text").textContent = "Examination already taken by you."
     }
     //EXAM ALREADY IN SESSION, CONTINUE FROM WHERE STUDENT STOPPED
     else if(data.status === "CONTINUE"){
@@ -37,7 +38,7 @@ var timer;
 //object that holds all the buttons attached to each question section
 var button = {}
 
-//This handles the previous and next buttons used to toggle between questions
+//This attaches event listeners to the previous and next buttons used to toggle between questions
 for(let i=1; i<=numberOfSections; i++){
   try {
     button["nextButton" + i] = document.getElementById("next-" + i);
@@ -46,11 +47,11 @@ for(let i=1; i<=numberOfSections; i++){
     button["nextButton" + i].addEventListener("click", (event) => {
       event.preventDefault()
       try{
-        //console.log(i+1)
         let num = i+1
         show("display-" + num);
         hide("display-" + i);
-        displayDescription(num)
+        displayDescription(num);
+        sendAnswers(num);             //send current answers to database
       }
       catch(error){
         show("display-" + i)
@@ -65,6 +66,7 @@ for(let i=1; i<=numberOfSections; i++){
         show("display-" + num)
         hide("display-"+i)
         displayDescription(num)
+        sendAnswers(num)            //send current answers to database
       }
       catch(e){
         show("display-" +i)
@@ -75,8 +77,6 @@ for(let i=1; i<=numberOfSections; i++){
   catch(error){
     console.error()
   }
-
-
 }
 
 //this starts the exam
@@ -84,69 +84,30 @@ const startExam = document.getElementById("start-exam")
 startExam.addEventListener("click", (event) => {
   isAnotherLoggedIn()
     .then(logOut => {
-      console.log(logOut)
+      //if someone else is already logged in, log current user out
+      if(logOut){
+        alert('Another student is already currently logged into this account!')
+        window.location.href = './index.html'
+      }
+      event.preventDefault();
+      timer = startTimer()
+      hide('display-0')
+      show('display-1')
+      show('timer')
+      show('question-type-box')
+      displayDescription(1)
+      show('submit-exam-box')
+      fetch('/student/start-exam')
     })
-  event.preventDefault();
-  timer = startTimer()
-  hide('display-0')
-  show('display-1')
-  show('timer')
-  show('question-type-box')
-  displayDescription(1)
-  show('submit-exam-box')
+  
 })
 
-//this ends the exam and console logs the answers entered by the student, empty answers are registered
+//this ends the exam and submits the answers to the server, empty answers are registered
 //as 'blank'
 const submitExam = document.getElementById("submit-exam")
 submitExam.addEventListener("click", event => {
   event.preventDefault()
-
-  let answers = {}
-  for(let i=1; i<=35; i++){
-    let elem;
-    let things = document.getElementsByName(i)
-
-    for(let thing of things){
-      if(thing.checked === true){
-        elem = thing;
-      }
-    }
-
-    if(elem == undefined){
-      answers["question-" + i] = "blank";
-    }
-    else{
-      answers["question-" + i] = elem.value;
-    }
-  }
-
-  for(let i=36; i<=95; i++){
-    let elem = document.getElementById(i);
-    let answer = elem.value === ""? "blank" : elem.value;
-    answers["question-" + i] = answer;
-  }
-
-  for(let i=96; i<=99; i++){
-    let elem;
-    let things = document.getElementsByName(i)
-
-    for(let thing of things){
-      if(thing.checked === true){
-        elem = thing;
-      }
-    }
-
-    if(elem == undefined){
-      answers["question-" + i] = "blank";
-    }
-    else{
-      answers["question-" + i] = elem.value;
-    }
-  }
-  let secondsLeft = time
-  let object = {secondsLeft, answers}
-  console.log(object)
+  submitExam(0);
 })
 
 //this function starts the timer and counts down from 7200 seconds to 0
@@ -179,6 +140,8 @@ function setClock(seconds = 0){
     secondElement.textContent = second
   }
   else{
+    time = 0;
+    submitExam(1);
     clearInterval(timer)
   }
 }
@@ -234,8 +197,6 @@ function displayAnswers(object = {secondsLeft: 0, answers: {}, currentQuestion: 
       }
     }
   }
-
-
 }
 
 //This function takes the id of any element and then makes it disappear from the screen if it is on display already
@@ -259,29 +220,141 @@ function show(id = ""){
   }
 }
 
+//runs routine check to see if another student is logged into this account
 async function isAnotherLoggedIn(){
   let toBeReturned;
   await fetch('/student/login-status')
     .then(response => response.json())
     .then(data => {
+      //another student is already logged into account
       if(data.status === "FAILED"){
-        console.log("Another is logged in")
         return true;
       }
-      else if(data.status === "LOG OUT"){        //runs routine check to see if student is indeed logged in
+      //server database error
+      else if(data.status === "LOG OUT"){        
         window.location.href = "./index.html"
       }
+      //no other student is logged in
       else{
-        console.log("No impostor found.")
         return false;
       }
     })
+    //no response from server. Terminate exam session
     .catch(e => {
-      console.log("No response from server")
-      return false
+      window.location.href = "./index.html"
     })
     .then(logout => {
        toBeReturned = logout;
     })
   return toBeReturned;
+}
+
+//this gets all the answers entered by the student and packages them into one object
+function getAnswers(){
+  let answers = {}
+  for(let i=1; i<=35; i++){
+    let elem;
+    let things = document.getElementsByName(i)
+
+    for(let thing of things){
+      if(thing.checked === true){
+        elem = thing;
+      }
+    }
+
+    if(elem == undefined){
+      answers["question-" + i] = "blank";
+    }
+    else{
+      answers["question-" + i] = elem.value;
+    }
+  }
+
+  for(let i=36; i<=95; i++){
+    let elem = document.getElementById(i);
+    let answer = elem.value === ""? "blank" : elem.value;
+    answers["question-" + i] = answer;
+  }
+
+  for(let i=96; i<=99; i++){
+    let elem;
+    let things = document.getElementsByName(i)
+
+    for(let thing of things){
+      if(thing.checked === true){
+        elem = thing;
+      }
+    }
+
+    if(elem == undefined){
+      answers["question-" + i] = "blank";
+    }
+    else{
+      answers["question-" + i] = elem.value;
+    }
+  }
+  let secondsLeft = time
+  let object = {secondsLeft, answers}
+
+  return object;
+}
+
+//this forwards the answers to the server mid-exam
+function sendAnswers(current_question = 0){
+  //gets all the current answers as well as the time left
+  let obj = getAnswers()
+  //attahces the current question to object
+  obj.current_question = current_question;
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json"
+    },
+    body: JSON.stringify(obj),
+  }
+
+  fetch('/student/exam', options)
+    .then(response => response.json())
+    .then(data => {
+      if(data.status === "LOG OUT"){
+        alert("Someone else logged into this account. Log in again to continue")
+        window.location.href = "./index.html"
+      }
+    })
+}
+
+//this submits the exam. state 0 signifies that the student submitted the exam voluntarily.
+//state 1 signifies that the student ran out of time and the exam was submitted for them.
+function submitExam(state = 0){
+  //gets all the current answers as well as the time left
+  let obj = getAnswers()
+
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json"
+    },
+    body: JSON.stringify(obj),
+  }
+
+  fetch('/student/stop-exam', options)
+    .then(response => response.json())
+    .then(data => {
+      if(data.status === "LOG OUT"){
+        alert("Another student is already logged into this account, please log in again.")
+        window.location.href = './index.html'
+      }
+      else{
+        for(let i = 1; i<58; i++){
+          hide(`display-${i}`)
+        }
+        show(`display-success`)
+        if(state == 0){
+          document.getElementById("success-text").textContent = "Examination submitted successfully!"  
+        }
+        if(state == 1){
+          document.getElementById("success-text").textContent = "Time up! Examination submitted successfully!"
+        }
+      }
+    })
 }

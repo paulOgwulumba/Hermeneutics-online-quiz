@@ -25,7 +25,7 @@ student.use(session({secret: "jets", saveUninitialized: true, resave: true}));
 student.use(bodyParser.urlencoded({extended: true}));
 student.use(cookieParser());
 
-//this appends a user object unique to the session id to any incoming request
+//this appends a user and _id object unique to the session id to any incoming request
 student.use((request, response, next) => {
   //Get auth token from cookies
   let authToken = request.session.id;
@@ -167,5 +167,46 @@ student.get('/login-status', requireAuth, (request, response) => {
     console.error(error)
     response.send({status: "FAILED"})
   }
+})
+
+//starts the exam and creates a timeout that terminates the exam after 2hr 15 mins window is passed
+student.get('/start-exam', (request, response) => {
+  //gets database id attached to request
+  let _id = request._id;
+  //updates exam session information
+  session_db.update({_id: _id}, {$set: {exam_status: 'in session', time_stamp: {start: new Date().toLocaleString()}}}, {})
+  console.log(`Student exam session started successfully. _id: ${_id}. Time: ${new Date().toLocaleString()}`)
+  //makes sure the exam session automatically ends after a maximum of 2hrs and 15 minutes if student does not end the exam
+  setTimeout(() => {
+    //get session information from database
+    session_db.findOne({_id: _id}, (error, document) => {
+      if(error) throw error
+      //check if exam has been submitted already and submit it if it hasn't already
+      if(document.exam_status !== 'taken'){
+        session_db.update({_id: _id}, {$set: {exam_status: 'taken', time_stamp: {stop: new Date().toLocaleString()}}}, {})
+        console.log(`Exam forcefully submitted because 2hr 15mins exam window has passed. _id:${_id}. Time: ${new Date().toLocaleString()}`)
+      }
+    })
+  }, 810000)
+  
+  response.send({status: "OK"})
+})
+
+//adds answers to the database
+student.post('/exam', requireAuth, (request, response) => {
+  let _id = request._id;
+  session_db.update({_id: _id}, {$set: {current_question: request.body.current_question, time_left: request.body.secondsLeft}}, {})
+  answers_db.update({_id: _id}, {$set: {answers: request.body.answers}}, {})
+  console.log(`Student exam answers, current question and time left updated successfully. _id: ${_id}. Time: ${new Date().toLocaleString()}`)
+})
+
+//ends the exam
+student.post('/stop-exam', requireAuth,(request, response) => {
+  let _id = request._id;
+  session_db.update({_id: _id}, {$set: {exam_status: 'taken', time_stamp: {stop: new Date().toLocaleString()}, time_left: request.body.secondsLeft}}, {})
+  answers_db.update({_id: _id}, {$set: {answers: request.body.answers}}, {})
+  console.log(`Exam submitted successfully. _id:${_id}. Time: ${new Date().toLocaleString()}`)
+
+  response.send({status: "OK"})
 })
 module.exports = student
