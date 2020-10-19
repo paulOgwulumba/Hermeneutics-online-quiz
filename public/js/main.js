@@ -3,9 +3,26 @@
 fetch('/student/session')
   .then(response => response.json())
   .then(data => {
+    //LOG STUDENT OUT
     if(data.status === "LOG OUT"){
       window.location.href = './index.html'
     }
+    //EXAM ALREADY TAKEN, LOG STUDENT OUT
+    else if(data.status === "TAKEN"){
+      alert("Exam already taken!")
+      window.location.href = './index.html'
+    }
+    //EXAM ALREADY IN SESSION, CONTINUE FROM WHERE STUDENT STOPPED
+    else if(data.status === "CONTINUE"){
+      //answers and time left to be displayed on screen
+      let toBeDisplayed = {}
+      toBeDisplayed.secondsLeft = data.session.time_left;
+      toBeDisplayed.answers = data.answers
+      toBeDisplayed.currentQuestion = data.session.current_question;
+
+      displayAnswers(toBeDisplayed);
+    }
+    else{}
   })
 
 //The number of question sections to be displayed one after the other
@@ -176,12 +193,24 @@ function displayDescription(num = 0){
   }
 }
 
-//this function fetches answers from the server as well as the number of seconds left and displays them on the page
-function displayAnswers(object = {secondsLeft: 0, answers: {}}){
+//this function fetches answers from the server as well as the number of seconds left and the current question and displays them on the page
+function displayAnswers(object = {secondsLeft: 0, answers: {}, currentQuestion: 0}){
   time = object.secondsLeft
+  timer = startTimer()
+  show('timer')
+  show('question-type-box')
+  show('submit-exam-box')
 
   //loops through all 99 answers
   for(let i=1; i<100; i++){
+    if(i === object.currentQuestion){
+      show(`display-${i}`)
+      displayDescription(i)
+    }
+    else{
+      hide(`display-${i}`)
+    }
+
     //handles the multichoice answers
     if(i<36 || i>95){
       let things = document.getElementsByName(i)
@@ -205,6 +234,8 @@ function displayAnswers(object = {secondsLeft: 0, answers: {}}){
       }
     }
   }
+
+
 }
 
 //This function takes the id of any element and then makes it disappear from the screen if it is on display already

@@ -37,6 +37,7 @@ student.use((request, response, next) => {
       //if a match is found, append the name of the student to the request and pass it on
       if(document !== null && document !== undefined){
         request.user = document.name;
+        request._id = document._id;
       }
       next()
     })
@@ -53,7 +54,7 @@ const requireAuth = (request, response, next) => {
     next();
   }
   else{
-    console.log(`Blocked server request from student that is not logged in. Time: ${new Date().toLocaleString()}`)
+    console.log(`Blocked server request from student that is not logged in. session id: ${request.session.id}. Time: ${new Date().toLocaleString()}`)
     response.send({status: "LOG OUT"});
     response.end()
   }
@@ -116,21 +117,48 @@ student.post('/log-in', (request, response) => {
 
 //checks if the student is logged in or not
 student.get('/session', requireAuth, (request, response) => {
-
-  response.send({status: "OK"})
+  let _id = request._id;
+  try{
+    session_db.findOne({_id: _id}, (error, document) => {
+      if(error) throw error;
+      //exam not already in session approve start of exam
+      if(document.exam_status === 'not taken'){
+        console.log(`Student (${request.name}) exam initializing attempt approved. Time: ${new Date().toLocaleString()} `);
+        response.send({status: "OK"})
+      }
+      //exam in session, approve continuation of exam
+      else if(document.exam_status === 'in session'){
+        answers_db.findOne({_id: _id}, (error, doc) => {
+          if(error) throw error
+          console.log(`Student (${request.name}) exam continuation attempt approved. Time: ${new Date().toLocaleString()} `);
+          response.send({status: "CONTINUE", session: document, answers: doc.answers});
+        })
+      }
+      //exam session already ended, disapprove
+      else{
+        console.log(`Student (${request.name}) exam initialization attempt blocked because he/she already took the exam. Time: ${new Date().toLocaleString()} `);
+        response.send({status: "TAKEN"})
+      }
+    })
+  }
+  catch(error){
+    console.error(error)
+    console.log(`Student (${request.name}) exam starting attempt blocked because of database error while fetching exam session state. Time: ${new Date().toLocaleString()} `);
+    response.send({status: "LOG OUT"})
+  }
 })
 
 //checks if multiple people logged into one student account or not
-student.get('/login-status', (request, response) => {
+student.get('/login-status', requireAuth, (request, response) => {
   let name = request.user;
   try{
     session_tracker_db.findOne({name: name, session_id: request.session.id}, (error, document) => {
       if(document == null || document == undefined){
-        console.log(`Checked log in status for ${name}. Status failed, second-party already logged into account. Time: ${new Date().toLocaleString()}`)
+        console.log(`Checked log in status for ${name} with session id: ${request.session.id}. Status failed, second-party already logged into account. Time: ${new Date().toLocaleString()}`)
         response.send({status: "FAILED"});
       }
       else{
-        console.log(`Checked log in status for ${name}. Status is okay, no second-party logged into same account. Time: ${new Date().toLocaleString()}`)
+        console.log(`Checked log in status for ${name} session id: ${request.session.id}. Status is okay, no second-party logged into same account. Time: ${new Date().toLocaleString()}`)
         response.send({status: "OK"});
       }
     })

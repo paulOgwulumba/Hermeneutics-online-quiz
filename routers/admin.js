@@ -214,7 +214,8 @@ admin.post('/student', (request, response) => {
         time_stamp: {
           start: "",
           stop: ""
-        }
+        },
+        current_question: 0
       }
 
       session_db.insert(session_database, (error, docs) => {
