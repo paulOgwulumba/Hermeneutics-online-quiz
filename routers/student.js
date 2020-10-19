@@ -123,27 +123,27 @@ student.get('/session', requireAuth, (request, response) => {
       if(error) throw error;
       //exam not already in session approve start of exam
       if(document.exam_status === 'not taken'){
-        console.log(`Student (${request.name}) exam initializing attempt approved. Time: ${new Date().toLocaleString()} `);
+        console.log(`Student (${request.user}) exam initializing attempt approved. Time: ${new Date().toLocaleString()} `);
         response.send({status: "OK"})
       }
       //exam in session, approve continuation of exam
       else if(document.exam_status === 'in session'){
         answers_db.findOne({_id: _id}, (error, doc) => {
           if(error) throw error
-          console.log(`Student (${request.name}) exam continuation attempt approved. Time: ${new Date().toLocaleString()} `);
+          console.log(`Student (${request.user}) exam continuation attempt approved. Time: ${new Date().toLocaleString()} `);
           response.send({status: "CONTINUE", session: document, answers: doc.answers});
         })
       }
       //exam session already ended, disapprove
       else{
-        console.log(`Student (${request.name}) exam initialization attempt blocked because he/she already took the exam. Time: ${new Date().toLocaleString()} `);
+        console.log(`Student (${request.user}) exam initialization attempt blocked because he/she already took the exam. Time: ${new Date().toLocaleString()} `);
         response.send({status: "TAKEN"})
       }
     })
   }
   catch(error){
     console.error(error)
-    console.log(`Student (${request.name}) exam starting attempt blocked because of database error while fetching exam session state. Time: ${new Date().toLocaleString()} `);
+    console.log(`Student (${request.user}) exam starting attempt blocked because of database error while fetching exam session state. Time: ${new Date().toLocaleString()} `);
     response.send({status: "LOG OUT"})
   }
 })
@@ -187,7 +187,7 @@ student.get('/start-exam', (request, response) => {
         console.log(`Exam forcefully submitted because 2hr 15mins exam window has passed. _id:${_id}. Time: ${new Date().toLocaleString()}`)
       }
     })
-  }, 810000)
+  }, 8100000)
   
   response.send({status: "OK"})
 })

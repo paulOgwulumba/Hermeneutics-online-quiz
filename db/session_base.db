@@ -1,3 +1,64 @@
 {"exam_status":"not taken","time_left":7200,"_id":"9H9Yd4ydKxb2ealK","time_stamp":{"start":"","stop":""}}
-{"exam_status":"not taken","time_left":7200,"_id":"wzhAWA4LScGptRJM","time_stamp":{"start":"","stop":""}}
+{"exam_status":"taken","time_left":7101,"_id":"wzhAWA4LScGptRJM","time_stamp":{"stop":"10/19/2020, 11:31:04 PM"},"current_question":6}
 {"exam_status":"not taken","time_left":7200,"_id":"ypIwcW4LkxkjBZHM","time_stamp":{"start":"","stop":""}}
+{"exam_status":"not taken","time_left":7200,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"","stop":""},"current_question":0}
+{"exam_status":"in session","time_left":7200,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":0}
+{"exam_status":"in session","time_left":7188,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":2}
+{"exam_status":"in session","time_left":7185,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":3}
+{"exam_status":"in session","time_left":7181,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":4}
+{"exam_status":"in session","time_left":7175,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":5}
+{"exam_status":"in session","time_left":7170,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":6}
+{"exam_status":"in session","time_left":7166,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":7}
+{"exam_status":"in session","time_left":7163,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":8}
+{"exam_status":"in session","time_left":7163,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":8}
+{"exam_status":"in session","time_left":7159,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":9}
+{"exam_status":"in session","time_left":7156,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":8}
+{"exam_status":"in session","time_left":7154,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":9}
+{"exam_status":"in session","time_left":7084,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":10}
+{"exam_status":"in session","time_left":7081,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":11}
+{"exam_status":"in session","time_left":7081,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":11}
+{"exam_status":"in session","time_left":7077,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":12}
+{"exam_status":"in session","time_left":7077,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":12}
+{"exam_status":"in session","time_left":7065,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":13}
+{"exam_status":"in session","time_left":7060,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":14}
+{"exam_status":"in session","time_left":7056,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":15}
+{"exam_status":"in session","time_left":7054,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":14}
+{"exam_status":"in session","time_left":7052,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":15}
+{"exam_status":"in session","time_left":7049,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":16}
+{"exam_status":"in session","time_left":7045,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":17}
+{"exam_status":"in session","time_left":7040,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":18}
+{"exam_status":"in session","time_left":7037,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":19}
+{"exam_status":"in session","time_left":7035,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":20}
+{"exam_status":"in session","time_left":7030,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":21}
+{"exam_status":"in session","time_left":7027,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":22}
+{"exam_status":"in session","time_left":7023,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":23}
+{"exam_status":"in session","time_left":7019,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":24}
+{"exam_status":"in session","time_left":7015,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":25}
+{"exam_status":"in session","time_left":7012,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":26}
+{"exam_status":"in session","time_left":7008,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":27}
+{"exam_status":"in session","time_left":7006,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":28}
+{"exam_status":"in session","time_left":7002,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":29}
+{"exam_status":"in session","time_left":6999,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":30}
+{"exam_status":"in session","time_left":6995,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":31}
+{"exam_status":"in session","time_left":6990,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":32}
+{"exam_status":"in session","time_left":6987,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":33}
+{"exam_status":"in session","time_left":6983,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":34}
+{"exam_status":"in session","time_left":6980,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":35}
+{"exam_status":"in session","time_left":6977,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":36}
+{"exam_status":"in session","time_left":6956,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":37}
+{"exam_status":"in session","time_left":6955,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":36}
+{"exam_status":"in session","time_left":6953,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":37}
+{"exam_status":"in session","time_left":7054,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":14}
+{"exam_status":"in session","time_left":6933,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":38}
+{"exam_status":"in session","time_left":7052,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":15}
+{"exam_status":"in session","time_left":6907,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":39}
+{"exam_status":"in session","time_left":6906,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":38}
+{"exam_status":"in session","time_left":6904,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":37}
+{"exam_status":"in session","time_left":6902,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":38}
+{"exam_status":"in session","time_left":6901,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":39}
+{"exam_status":"in session","time_left":6871,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":40}
+{"exam_status":"in session","time_left":6861,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":41}
+{"exam_status":"in session","time_left":6852,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":42}
+{"exam_status":"in session","time_left":6807,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":43}
+{"exam_status":"in session","time_left":6752,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"start":"10/19/2020, 11:41:42 PM"},"current_question":45}
+{"exam_status":"taken","time_left":6749,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"stop":"10/20/2020, 12:32:49 AM"},"current_question":45}

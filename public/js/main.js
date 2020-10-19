@@ -1,3 +1,65 @@
+//The number of question sections to be displayed one after the other
+const numberOfSections = 100;
+
+//duration of the exam in seconds
+var time = 7200;
+
+//id for the timer handling the exam duration 
+var timer;
+
+//object that holds all the buttons attached to each question section
+var button = {}
+
+
+//This attaches event listeners to the previous and next buttons used to toggle between questions
+for(let i=1; i<=numberOfSections; i++){
+  try {
+    button["nextButton" + i] = document.getElementById("next-" + i);
+    button["prevButton" + i] = document.getElementById("previous-" + i)
+
+    button["nextButton" + i].addEventListener("click", (event) => {
+      event.preventDefault()
+      try{
+        let num = i+1
+        show("display-" + num);
+        console.log("prev: display-" + i)
+        console.log("next: display-" + num)
+        hide("display-" + i);
+        displayDescription(num);
+        sendAnswers(num);             //send current answers to database
+        console.log("next")
+      }
+      catch(error){
+        show("display-" + i)
+        displayDescription(i)
+      }
+    })
+
+    button["prevButton" + i].addEventListener("click", (event) => {
+      event.preventDefault()
+      try{
+        let num = i-1
+        console.log("prev: display-" + num)
+        console.log("next: display-" + i)
+        show("display-" + num)
+        hide("display-"+i)
+        displayDescription(num)
+        sendAnswers(num)            //send current answers to database
+        console.log("previous")
+      }
+      catch(e){
+        console.error(e)
+        show("display-" +i)
+        displayDescription(i)
+      }
+    })
+  }
+  catch(error){
+    console.error()
+  }
+}
+
+
 //Checks if the student is already logged in. If yes, session continues, if not, session is cancelled
 //and the student is redirected to the log in page
 fetch('/student/session')
@@ -26,58 +88,8 @@ fetch('/student/session')
     else{}
   })
 
-//The number of question sections to be displayed one after the other
-const numberOfSections = 100;
 
-//duration of the exam in seconds
-var time = 7200;
 
-//id for the timer handling the exam duration 
-var timer;
-
-//object that holds all the buttons attached to each question section
-var button = {}
-
-//This attaches event listeners to the previous and next buttons used to toggle between questions
-for(let i=1; i<=numberOfSections; i++){
-  try {
-    button["nextButton" + i] = document.getElementById("next-" + i);
-    button["prevButton" + i] = document.getElementById("previous-" + i)
-
-    button["nextButton" + i].addEventListener("click", (event) => {
-      event.preventDefault()
-      try{
-        let num = i+1
-        show("display-" + num);
-        hide("display-" + i);
-        displayDescription(num);
-        sendAnswers(num);             //send current answers to database
-      }
-      catch(error){
-        show("display-" + i)
-        displayDescription(i)
-      }
-    })
-
-    button["prevButton" + i].addEventListener("click", (event) => {
-      event.preventDefault()
-      try{
-        let num = i-1
-        show("display-" + num)
-        hide("display-"+i)
-        displayDescription(num)
-        sendAnswers(num)            //send current answers to database
-      }
-      catch(e){
-        show("display-" +i)
-        displayDescription(i)
-      }
-    })
-  }
-  catch(error){
-    console.error()
-  }
-}
 
 //this starts the exam
 const startExam = document.getElementById("start-exam")
@@ -104,8 +116,8 @@ startExam.addEventListener("click", (event) => {
 
 //this ends the exam and submits the answers to the server, empty answers are registered
 //as 'blank'
-const submitExam = document.getElementById("submit-exam")
-submitExam.addEventListener("click", event => {
+const submitExamBtn = document.getElementById("submit-exam")
+submitExamBtn.addEventListener("click", event => {
   event.preventDefault()
   submitExam(0);
 })
@@ -165,13 +177,18 @@ function displayAnswers(object = {secondsLeft: 0, answers: {}, currentQuestion: 
   show('submit-exam-box')
 
   //loops through all 99 answers
-  for(let i=1; i<100; i++){
+  for(let i=0; i<100; i++){
     if(i === object.currentQuestion){
       show(`display-${i}`)
       displayDescription(i)
     }
     else{
-      hide(`display-${i}`)
+      try{
+        hide(`display-${i}`)
+      }
+      catch(error){
+        console.log(error)
+      }
     }
 
     //handles the multichoice answers
@@ -202,22 +219,15 @@ function displayAnswers(object = {secondsLeft: 0, answers: {}, currentQuestion: 
 //This function takes the id of any element and then makes it disappear from the screen if it is on display already
 function hide(id = ""){
   let element = document.getElementById(id);
-  if(!/^hide$/.test(element.className)){
-    element.className = element.className + " hide"
-  }
+  element.className = element.className + " hide"
+  console.log(`hide id: ${id}. class: ${element.className}`)
 }
 
 //This function takes the id of an element and makes it appear on the screen if it isn't already on display
 function show(id = ""){
   let element = document.getElementById(id);
-  //console.log("id:" + id)
-  if(/\shide$/.test(element.className)){
-    element.className = element.className.replace("hide", "")
-  }
-  else{
-    // console.log(id)
-    // console.log("Hellos")
-  }
+  element.className = element.className.replace(/hide/g, "")
+  console.log(`show id: ${id}. class: ${element.className}`)
 }
 
 //runs routine check to see if another student is logged into this account
@@ -348,6 +358,9 @@ function submitExam(state = 0){
         for(let i = 1; i<58; i++){
           hide(`display-${i}`)
         }
+        hide('timer')
+        hide('question-type-box')
+        hide("submit-exam")
         show(`display-success`)
         if(state == 0){
           document.getElementById("success-text").textContent = "Examination submitted successfully!"  
