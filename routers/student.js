@@ -36,7 +36,6 @@ student.use((request, response, next) => {
       if(error) throw error
       //if a match is found, append the name of the student to the request and pass it on
       if(document !== null && document !== undefined){
-        console.log("here")
         request.user = document.name;
       }
       next()
@@ -83,9 +82,17 @@ student.post('/log-in', (request, response) => {
           if(document.password === user.password){
             console.log(`Successfull log in to exam portal by Student ID: ${user.student_id}. Time: ${new Date().toLocaleString()}`)
             //update session tracker database
-            session_tracker_db.update({name: document.name, _id: document._id}, {$set: {session_id: request.session.id}}, {upsert: true, returnUpdatedDocs: true}, (error, noOfUpdated, affectedDocs, upsert) => {
-              console.log("This file was updated")
-              console.log(affectedDocs)
+            // session_tracker_db.update({name: document.name, _id: document._id}, {$set: {session_id: request.session.id}}, {upsert: true, returnUpdatedDocs: true}, (error, noOfUpdated, affectedDocs, upsert) => {
+            //   console.log("This file was updated")
+            //   console.log(affectedDocs)
+            // })
+
+            session_tracker_db.remove({name: document.name, _id: document._id}, {multi: true}, (error, number) => {
+              if(error) throw error
+              session_tracker_db.insert({name: document.name, _id: document._id, session_id: request.session.id}, (error, doc) => {
+                console.log("This file was updated")
+                console.log(doc)
+              })
             })
             //set cookie
             
@@ -114,7 +121,7 @@ student.get('/session', requireAuth, (request, response) => {
 })
 
 //checks if multiple people logged into one student account or not
-student.get('/login-status', requireAuth, (request, response) => {
+student.get('/login-status', (request, response) => {
   let name = request.user;
   try{
     session_tracker_db.findOne({name: name, session_id: request.session.id}, (error, document) => {
