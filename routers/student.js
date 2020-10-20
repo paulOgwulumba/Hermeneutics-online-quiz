@@ -91,8 +91,6 @@ student.post('/log-in', (request, response) => {
             session_tracker_db.remove({name: document.name, _id: document._id}, {multi: true}, (error, number) => {
               if(error) throw error
               session_tracker_db.insert({name: document.name, _id: document._id, session_id: request.session.id}, (error, doc) => {
-                console.log("This file was updated")
-                console.log(doc)
               })
             })
             //set cookie
@@ -183,7 +181,7 @@ student.get('/start-exam', (request, response) => {
       if(error) throw error
       //check if exam has been submitted already and submit it if it hasn't already
       if(document.exam_status !== 'taken'){
-        session_db.update({_id: _id}, {$set: {exam_status: 'taken', time_stamp: {stop: new Date().toLocaleString()}}}, {})
+        session_db.update({_id: _id}, {$set: {exam_status: 'taken', "time_stamp.stop": new Date().toLocaleString()}}, {})
         console.log(`Exam forcefully submitted because 2hr 15mins exam window has passed. _id:${_id}. Time: ${new Date().toLocaleString()}`)
       }
     })
@@ -198,12 +196,13 @@ student.post('/exam', requireAuth, (request, response) => {
   session_db.update({_id: _id}, {$set: {current_question: request.body.current_question, time_left: request.body.secondsLeft}}, {})
   answers_db.update({_id: _id}, {$set: {answers: request.body.answers}}, {})
   console.log(`Student exam answers, current question and time left updated successfully. _id: ${_id}. Time: ${new Date().toLocaleString()}`)
+  response.send({status: "OK"})
 })
 
 //ends the exam
 student.post('/stop-exam', requireAuth,(request, response) => {
   let _id = request._id;
-  session_db.update({_id: _id}, {$set: {exam_status: 'taken', time_stamp: {stop: new Date().toLocaleString()}, time_left: request.body.secondsLeft}}, {})
+  session_db.update({_id: _id}, {$set: {exam_status: 'taken', "time_stamp.stop": new Date().toLocaleString(),time_left: request.body.secondsLeft}}, {})
   answers_db.update({_id: _id}, {$set: {answers: request.body.answers}}, {})
   console.log(`Exam submitted successfully. _id:${_id}. Time: ${new Date().toLocaleString()}`)
 
