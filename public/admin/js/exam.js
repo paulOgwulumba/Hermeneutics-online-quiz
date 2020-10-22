@@ -46,6 +46,11 @@ function fetchSessionStatus(){
     .then(data => {
       let exam_status = data.exam_status
       document.getElementById('exam_status').textContent = exam_status
+      if(data.exam_status === "taken"){
+        show("more-info")
+        document.getElementById('start').textContent = data.time_stamp.start
+        document.getElementById('stop').textContent = data.time_stamp.stop
+      }
     })
 }
 
