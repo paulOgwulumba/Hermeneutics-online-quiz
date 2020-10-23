@@ -19,6 +19,7 @@ const Datastore = require('nedb');
 const student_db = require('../database_objects/student_db')
 const answers_db = require('../database_objects/answers_db')
 const session_db = require('../database_objects/session_db')
+const session_tracker_db = require('../database_objects/session_tracker_db')
 
 //set up session middleware
 admin.use(session({secret: "jets", saveUninitialized: true, resave: true}))
@@ -28,7 +29,7 @@ admin.use(session({secret: "jets", saveUninitialized: true, resave: true}))
 var sessionID;
 
 /*
-  GET REQUESTS
+*  GET REQUESTS
 */
 //checks if session is open, if it is not, a redirect is triggered
 admin.get('/session', (request, response) => {
@@ -137,7 +138,7 @@ admin.get('/student/answer-sheet/:id', (request, response) => {
 })
 
 /*
-  POST REQUESTS
+*  POST REQUESTS
 */
 //validates the log in entries for the admin page
 admin.post('/log-in', (request, response) => {
@@ -235,7 +236,7 @@ admin.post('/student', (request, response) => {
 
 
 /*
-  DELETE REQUESTS
+*  DELETE REQUESTS
 */
 //deletes a student's info from the database
 admin.delete('/student', (request, response) => {
@@ -257,6 +258,14 @@ admin.delete('/student', (request, response) => {
       if(error) throw error;
       console.log(`${number} student exam session state deleted successfully. Time: ${new Date().toLocaleString()}`)
     })
+
+    //delete student exam session tracker database object
+    session_tracker_db.remove({_id: request.body._id}, {}, (error, number) => {
+      if(error) throw error;
+      console.log(`${number} student exam session tracker object deleted successfully. Time: ${new Date().toLocaleString()}`)
+    })
+
+
     response.send({status: "OK"})
   }
   catch(error){

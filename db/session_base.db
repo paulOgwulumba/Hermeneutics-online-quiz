@@ -4,3 +4,4 @@
 {"exam_status":"taken","time_left":7101,"_id":"wzhAWA4LScGptRJM","time_stamp":{"stop":"10/19/2020, 11:31:04 PM"},"current_question":6}
 {"exam_status":"taken","time_left":6749,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"stop":"10/20/2020, 12:32:49 AM"},"current_question":45}
 {"exam_status":"taken","time_left":7096,"_id":"ypIwcW4LkxkjBZHM","time_stamp":{"start":"10/20/2020, 2:28:39 PM","stop":"10/20/2020, 2:31:16 PM"},"current_question":32}
+{"$$deleted":true,"_id":"ypIwcW4LkxkjBZHM"}
