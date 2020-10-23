@@ -47,8 +47,18 @@ form.addEventListener('submit', event => {
           document.getElementsByClassName("display-5")[0].innerHTML = 'Student added successfully! <span class="fa fa-check"></span>'
           document.getElementsByClassName("display-5")[0].className += " text-success"
         }
+        else if(data.status === "ID"){
+          document.getElementById('student_id-error').textContent = "*This student ID already exists in database!"
+          document.getElementById('student_id').focus()
+          show("student_id-error")
+        }
+        else if(data.status === "EMAIL"){
+          document.getElementById('email-error').textContent = "*This email address is already registered to another student!"
+          document.getElementById('email').focus()
+          show("email-error")
+        }
         else{
-          document.getElementsByClassName("display-5")[0].innerHTML = 'Something went wrong! <span class="fa fa-close"></span> Please try again'
+          document.getElementsByClassName("display-5")[0].innerHTML = `Something went wrong! Try again. <span class="fa fa-close"></span> Please try again`
           document.getElementsByClassName("display-5")[0].className += " text-danger"
         }
       })
