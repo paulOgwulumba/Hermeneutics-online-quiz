@@ -1,3 +1,14 @@
+//Student db id
+const _id = window.location.search.replace("?", "")
+
+fetch(`/admin/student/${_id}`)
+    .then(response => response.json())
+    .then(data => {
+      if('name' in data){
+        document.getElementById("name").textContent = data.name
+      }
+    })
+
 //The number of question sections to be displayed one after the other
 const numberOfSections = 100;
 

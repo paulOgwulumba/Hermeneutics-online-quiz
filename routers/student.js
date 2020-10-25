@@ -95,7 +95,7 @@ student.post('/log-in', (request, response) => {
             })
             //set cookie
             
-            response.send({status: "OK"})
+            response.send({status: "OK", _id: document._id})
           }
           else{
               console.log(`Failed log in attempt to exam portal by Student ID: ${user.student_id} due to wrong password. Time: ${new Date().toLocaleString()}`)
