@@ -2,6 +2,7 @@
 fetch('/admin/session')
   .then(response => response.json())
   .then(data => {
+    console.log(data)
     if(data.status !== "OK"){
       window.location.href = "./index.html"
     }
@@ -78,7 +79,7 @@ function fetchAnswerSheet(){
   fetch(`/admin/student/answer-sheet/${_id}`)
     .then(response => response.json())
     .then(data => {
-      console.log(data)
+      
       if('status' in data){}
       else{
         for(let i =1; i<100; i++){

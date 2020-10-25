@@ -12,6 +12,8 @@ const cookieParser = require('cookie-parser');
 
 require('dotenv').config({path: path.join(__dirname, '..', '.env')});
 
+admin.use(cookieParser())
+
 //include file reader/writer
 const fs = require('fs');
 
@@ -54,19 +56,26 @@ admin.use(session({secret: "jets", saveUninitialized: true, resave: true}))
 //admin.use(bodyParser.urlencoded({extended: true}));
 //admin.use(cookieParser())
 //variable to track sessions with
-var sessionID;
+var sessionID = "0";
 
 /*
 *  GET REQUESTS
 */
 //checks if session is open, if it is not, a redirect is triggered
 admin.get('/session', (request, response) => {
-  if(sessionID === request.cookies["AdminToken"]){
+  let AdminToken;
+  try{
+    AdminToken = request.cookies["AdminToken"]
+  }
+  catch(error){}
+  if(sessionID === AdminToken){
+    console.log(`Admin session confirmed. Time: ${new Date().toLocaleString()}`)
     response.send({status: "OK"})
   }
   else{
+    console.log(`Admin session cancelled because no records of previous log in found. Time: ${new Date().toLocaleString()}`)
     response.send({status: "FAILED"})
-  }
+  }  
 })
 
 //cancels present session and redirect to log in page is triggered
