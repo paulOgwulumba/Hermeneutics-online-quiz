@@ -93,6 +93,9 @@ fetch('/student/session')
       toBeDisplayed.secondsLeft = data.session.time_left;
       toBeDisplayed.answers = data.answers
       toBeDisplayed.currentQuestion = data.session.current_question;
+      if(toBeDisplayed.currentQuestion === 0){
+        toBeDisplayed.currentQuestion++
+      }
 
       if(toBeDisplayed.currentQuestion === 0){
         toBeDisplayed.currentQuestion = 1;
