@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="./css/admin.css">
 </head>
 <body style="background-image: url(../images/post-3.jpg);">
-  <div class="overlay-mf" style="height: calc(100% + 5rem);"></div>
+  <div class="overlay-mf"></div>
 
   <nav class="navbar navbar-expand-md navbar-dark bg-dark justify-content-end">
     <div class="container">
@@ -44,16 +44,30 @@
     </div>
   </nav>
 
+  <button id="print" class="btn btn-sm btn-warning no-print">Print Answer Sheet</button>
   <!--Personal Info of student-->
   <div class="container" id="student-info">
-    <h4 class="display-5 header-text" style="transform: translateY(2.5rem);">
-      Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong><span class="text-info" id="student_name">Idiamin</span></strong> <br>
-      <small>Student ID: &nbsp;&nbsp; <strong><span class="text-info" id="student_id">0908</span></strong></small><br>
-      <small>Exam Status: &nbsp;&nbsp; <strong><span class="text-info" id="exam_status">Not taken</span></strong></small>
-    </h4>
-    <p class="text-center text-muted student-info hide">
-      Click on student's info to view more
-    </p>
+    <div class="row">
+      <div class="col-12 col-lg-6">
+        <h4 class="display-5 header-text" style="transform: translateY(2.5rem);">
+          Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong><span class="text-info" id="student_name">Student Name</span></strong> <br>
+          <small>Student ID: &nbsp;&nbsp; <strong><span class="text-info" id="student_id">Student ID</span></strong></small><br>
+          <small class="no-print">Exam Status: &nbsp;&nbsp; <strong><span class="text-info" id="exam_status">Exam status</span></strong></small>
+        </h4>
+      </div>
+      <div class="col-12 col-md-6 no-print hide" id="more-info">
+        <h4 class="display-5 header-text" style="transform: translateY(2.5rem);">
+          <small>Started: &nbsp;&nbsp; <strong><span class="text-info" id="start"></span></strong></small><br>
+          <small>Ended: &nbsp;&nbsp;&nbsp;&nbsp; <strong><span class="text-info" id="stop"></span></strong></small>
+        </h4>
+      </div>
+      <div class="col-12 col-md-6 no-print hide" id="more-info2">
+        <h4 class="display-5 header-text" style="transform: translateY(2.5rem);">
+          <small>Email Status: &nbsp;&nbsp; <strong><span class="text-info" id="email"></span></strong></small><br><br>
+          <small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="send-email" class="btn btn-outline-info">Send Email</button></small>
+        </h4>
+      </div>
+    </div>
   </div>
 
 
@@ -505,6 +519,7 @@
       <strong>80.</strong>&nbsp;&nbsp;&nbsp; <strong><span class="text-info" id="answer-80">____</span></strong><br>
       <br>
       <strong>81.</strong>&nbsp;&nbsp;&nbsp; <strong><span class="text-info" id="answer-81">____</span></strong><br>
+      <br>
       <br>
       <strong>82.</strong>&nbsp;&nbsp;&nbsp; <strong><span class="text-info" id="answer-82">____</span></strong><br>
       <br>

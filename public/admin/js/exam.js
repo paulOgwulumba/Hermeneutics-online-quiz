@@ -26,6 +26,10 @@ fetch(`/admin/student/${_id}`)
     else{
       document.getElementById("student_name").textContent = data.name 
       document.getElementById("student_id").textContent = data.student_id
+      try{
+        document.getElementById("email").textContent = data.email_status
+      }
+      catch(e) {}
       fetchSessionStatus()
       fetchAnswerSheet()
     }
@@ -38,6 +42,18 @@ fetch(`/admin/student/${_id}`)
     console.log(e)
   })
 
+//button that sends email to student
+document.getElementById("send-email").addEventListener("click", (event) => {
+  event.preventDefault()
+
+  fetch(`/admin/student/send-email/${_id}`)
+    .then(response => response.json())
+    .then(data => {
+      if(data.status === "OK"){
+        alert("Email sent successfully")
+      }
+    })
+})
 
 //this function gets the exam session state of the student from the server using the student's database id
 function fetchSessionStatus(){
@@ -46,6 +62,14 @@ function fetchSessionStatus(){
     .then(data => {
       let exam_status = data.exam_status
       document.getElementById('exam_status').textContent = exam_status
+      if(data.exam_status === "taken" || data.exam_status === "in session"){
+        show("more-info")
+        document.getElementById('start').textContent = data.time_stamp.start
+        document.getElementById('stop').textContent = data.time_stamp.stop
+      }
+      else if(data.exam_status === "not taken"){
+        show("more-info2")
+      }
     })
 }
 
@@ -82,3 +106,10 @@ function hide(id = ""){
     element.className = element.className + " hide"
   }
 }
+
+const printBtn = document.getElementById("print")
+
+printBtn.addEventListener("click", event => {
+  event.preventDefault()
+  window.print()
+})

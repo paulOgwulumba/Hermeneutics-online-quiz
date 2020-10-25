@@ -19,12 +19,12 @@
 </head>
 <body>
 
-  <div class="overlay-mf"></div>
+  <div class="overlay-mf" style="height: 100%"></div>
   
 
   <!--Navbar-->
   <nav class ="navbar navbar-dark bg-dark">
-    <a class ="navbar-brand" href ="#" id="tester"> Hermeneutics Online Exam </a>
+    <a class ="navbar-brand" href ="#" id="tester"> Hermeneutics Online Exam - <small><span id="name"></span></small> </a>
     <div class="timer hide" id="timer">
       <p class="text-light">
         <span id="hours">02</span>: <span id="minutes">00</span> : <span id="seconds">00</span>
@@ -80,38 +80,8 @@
     </div>
   </div>
 
-  <!--Log in-->
-  <div class="container" id="display-log-in">
-    <div class="exam-container" style="padding: 2rem">
-      <div class="row">
-        <div class="col-12 question-number">
-          <p class="text-center display-6">Enter your log in details</p>
-        </div>
-      </div>
-      <br>
-      <div class="row">
-        <div class="col-12">
-          <form action="" id="form">
-            <div class="form-group" style="padding: 0rem">
-              <input type="text" class="form-control" id="student-id" placeholder="Student ID">
-            </div>
-            <div class="form-group" style="padding: 0rem">
-              <input type="password" class="form-control" id="password" placeholder="Password">
-            </div>
-            <hr>
-            <div class="form-group">
-              <p class="text-center">
-                <button class="btn btn-outline-light hvr-grow" id="log-in-button">Log in</button>
-              </p>
-            </div>
-          </form>
-        </div>
-      </div>    
-    </div>
-  </div>
-
   <!--Instructions-->
-  <div class="container hide" id="display-0">
+  <div class="container" id="display-0">
     <div class="row instructions">
       <div class="col-12">
         <h4 class="text-center display-6">
@@ -131,6 +101,17 @@
         <p class="text-center">
           <button id="start-exam" class="btn btn-lg btn-outline-light">Start Exam</button>
         </p>
+      </div>
+    </div>
+  </div>
+
+  <!--Submit success-->
+  <div class="container hide" id="display-success">
+    <div class="row instructions">
+      <div class="col-12">
+        <h4 class="text-center text-success display-6">
+          <span id="success-text">Exam submitted successfully</span> <span class="fa fa-check"></span>
+        </h4>
       </div>
     </div>
   </div>

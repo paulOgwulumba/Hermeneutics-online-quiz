@@ -210,6 +210,7 @@ function shaveArray(id=""){
   })
 }
 
-function redirectToExams(id = ""){
+function redirectToExams (id = ""){
+  
   window.location.href = `./exam.html?${id}`
 }
