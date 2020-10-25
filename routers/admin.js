@@ -61,7 +61,7 @@ var sessionID;
 */
 //checks if session is open, if it is not, a redirect is triggered
 admin.get('/session', (request, response) => {
-  if(sessionID === request.session.id){
+  if(sessionID === request.cookies["AdminToken"]){
     response.send({status: "OK"})
   }
   else{
@@ -193,6 +193,7 @@ admin.post('/log-in', (request, response) => {
     console.log(`Successful Admin log in confirmed. Time: ${new Date().toLocaleString()}`)
     //creates a new session to be tracked
     sessionID = request.session.id
+    response.cookie("AdminToken", sessionID)
     response.send({status: "OK"})
   }
   else{

@@ -106,3 +106,10 @@ function hide(id = ""){
     element.className = element.className + " hide"
   }
 }
+
+const printBtn = document.getElementById("print")
+
+printBtn.addEventListener("click", event => {
+  event.preventDefault()
+  window.print()
+})

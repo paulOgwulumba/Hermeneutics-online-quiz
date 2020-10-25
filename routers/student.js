@@ -28,7 +28,7 @@ student.use(cookieParser());
 //this appends a user and _id object unique to the session id to any incoming request
 student.use((request, response, next) => {
   //Get auth token from cookies
-  let authToken = request.session.id;
+  let authToken = request.cookies["AuthToken"];
 
   //sorts through the session tracker database to see what user is attached to authToken
   try{
@@ -82,12 +82,9 @@ student.post('/log-in', (request, response) => {
           //correct username and password
           if(document.password === user.password){
             console.log(`Successfull log in to exam portal by Student ID: ${user.student_id}. Time: ${new Date().toLocaleString()}`)
-            //update session tracker database
-            // session_tracker_db.update({name: document.name, _id: document._id}, {$set: {session_id: request.session.id}}, {upsert: true, returnUpdatedDocs: true}, (error, noOfUpdated, affectedDocs, upsert) => {
-            //   console.log("This file was updated")
-            //   console.log(affectedDocs)
-            // })
-
+            
+            request.session.cookie["AuthToken"] = request.session.id
+            response.cookie("AuthToken", request.session.id)
             session_tracker_db.remove({name: document.name, _id: document._id}, {multi: true}, (error, number) => {
               if(error) throw error
               session_tracker_db.insert({name: document.name, _id: document._id, session_id: request.session.id}, (error, doc) => {

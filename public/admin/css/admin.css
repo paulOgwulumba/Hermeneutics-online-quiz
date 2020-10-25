@@ -16,7 +16,7 @@ tr{
 
 .overlay-mf {
   background-color: black;
-  position: absolute;
+  position: fixed;
   top: 0rem;
   left: 0rem;
   width: 100%;
@@ -83,9 +83,16 @@ tr{
   padding: 1rem;
   padding-top: 2rem;
   padding-left: 3rem;
-  max-height: 30rem;
-  overflow-y: scroll;
+  
   margin-bottom: 2rem;
+}
+
+#print{
+  position: fixed;
+  right: 3rem;
+  top: 4rem;
+  transform: translateX(2rem);
+  z-index: 12000;
 }
 
 
@@ -95,8 +102,12 @@ tr{
 }
 /*Medium (md) devices (tablets, 768px and down) */
 @media (max-width: 992px) { 
-  .answer-sheet {
-    max-height: 26rem;
+  
+}
+
+@media print {
+  .no-print, .no-print * {
+    display: none !important;
   }
 }
 
