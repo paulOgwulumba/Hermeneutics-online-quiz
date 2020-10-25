@@ -179,16 +179,34 @@ admin.get('/student/send-email/:id', (request, response) => {
             greeting: "Hello",
             name: doc.name,
             intro: 'Calvary greetings to you in Jesus\' name',
-            action: {
-              instructions: [`These are your log in details for the Hermeneutics I online quiz. Keep them safe.\nUser ID: ${doc.student_id} \n password: ${doc.password}. \nMake sure you use a computer to write this quiz and not a phone.\nTo get started with the quiz, please click here.`, 'Fuck shit'],
-              button: {
-                color: '#22BC66',
-                text: "Go to exam web page.",
-                link: `localhost:3000/index.html?${doc._id}`
-              },
-              outro: `You can also copy this link and paste on your browser to get started: localhost:3000/index.html?${doc._id}`
+            action: [
+                {
+                  instructions: `These are your log in details for the Hermeneutics I online quiz. Keep them safe.`,
+                  button: {}
+                },
+                {
+                  instructions:  `User ID: ${doc.student_id}`,
+                  button: {}
+                },
+                {
+                  instructions: `password: ${doc.password}.`,
+                  button: {}
+                },
+                {
+                  instructions: `Make sure you use a computer browser to write this quiz and not a phone.`,
+                  button: {}
+                },
+                {
+                  instructions: `To get started with the quiz, please click here.`,
+                  button: {
+                    
+                    text: "Go to exam web page.",
+                    link: `http://localhost:3000/index.html?${doc._id}`
+                  }
+                }
+              ],
+              outro: `You can also copy this link and paste on your browser to get started: http://localhost:3000/index.html?${doc._id}`
             }
-          }
         }
 
         //Generate a HTML email with the provided contents
