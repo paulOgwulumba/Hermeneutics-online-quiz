@@ -210,13 +210,7 @@ function shaveArray(id=""){
   })
 }
 
-async function redirectToExams (id = ""){
-  await fetch(`/admin/student/send-email/${id}`)
-    .then(response => response.json())
-    .then(data => {
-      if(data.status === "OK"){
-        alert("Email sent successfully")
-      }
-    })
+function redirectToExams (id = ""){
+  
   window.location.href = `./exam.html?${id}`
 }

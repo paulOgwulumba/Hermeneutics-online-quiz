@@ -42,7 +42,7 @@ const transporter = nodemailer.createTransport({
 //Include mailgen for styling email
 const Mailgen = require('mailgen');
 const mailGenerator = new Mailgen({
-    theme: 'salted',
+    theme: 'neopolitan',
     product: {
         name: 'Jos, ECWA Theological Seminary',
         link: 'http://www.jets.edu.ng'
@@ -173,48 +173,7 @@ admin.get('/student/send-email/:id', (request, response) => {
     student_db.findOne({_id: _id}, (error, doc) => {
       if(error) throw error
       if(doc !== null && doc!==undefined){
-        //set up  body of email to be sent
-        let email = {
-          body: {
-            greeting: "Hello",
-            name: doc.name,
-            intro: 'Calvary greetings to you in Jesus\' name',
-            action: [
-                {
-                  instructions: `These are your log in details for the Hermeneutics I online quiz. Keep them safe.`,
-                  button: {}
-                },
-                {
-                  instructions:  `User ID: ${doc.student_id}`,
-                  button: {}
-                },
-                {
-                  instructions: `password: ${doc.password}.`,
-                  button: {}
-                },
-                {
-                  instructions: `Make sure you use a computer browser to write this quiz and not a phone.`,
-                  button: {}
-                },
-                {
-                  instructions: `To get started with the quiz, please click here.`,
-                  button: {
-                    
-                    text: "Go to exam web page.",
-                    link: `http://localhost:3000/index.html?${doc._id}`
-                  }
-                }
-              ],
-              outro: `You can also copy this link and paste on your browser to get started: http://localhost:3000/index.html?${doc._id}`
-            }
-        }
-
-        //Generate a HTML email with the provided contents
-        let emailBody = mailGenerator.generate(email)
-
-        //preview generated email
-        fs.writeFileSync(path.join(__dirname, 'email-preview', `preview-${doc.name}.html`), emailBody, 'utf8');
-        console.log(`Preview email body for ${doc.name} generated successfully. Time: ${new Date().toLocaleString()}`)
+        sendEmail(doc)
         response.send({status: "OK"})
       }
     })
@@ -394,5 +353,69 @@ admin.delete('/student', (request, response) => {
     response.send({status: "FAILED"})
   }
 })
+
+//generates and sends email to student
+function sendEmail(doc = {
+  name: "",
+  email: "",
+  student_id: "",
+  password: "",
+  _id: ""
+}){
+  //set up  body of email to be sent
+  let email = {
+    body: {
+      greeting: "Hi",
+      name: doc.name,
+      intro: [
+        'Calvary greetings to you in Jesus\' name.',
+        `These are your log in details for the Hermeneutics I online quiz. Keep them safe.`,
+        `USER ID: ${doc.student_id}`,
+        `PASSWORD: ${doc.password}.`,
+        `It is of importance that you use a computer and not a phone to write this quiz, preferably with a chrome browser.`
+      ],
+      action: [
+          {
+            instructions: `To get started with the quiz, please click here.`,
+            button: {
+              
+              text: "Go to exam log in page.",
+              link: `http://localhost:3000/index.html?${doc._id}`
+            }
+          }
+        ],
+        outro: [
+          `You can also copy this link and paste on your browser to get started:`,
+          `http://localhost:3000/index.html?${doc._id}`
+        ]
+      }
+  }
+
+  //Generate a HTML email with the provided contents
+  let emailBody = mailGenerator.generate(email)
+
+  //preview generated email
+  // fs.writeFileSync(path.join(__dirname, 'email-preview', `preview-${doc.name}.html`), emailBody, 'utf8');
+  // console.log(`Preview email body for ${doc.name} generated successfully. Time: ${new Date().toLocaleString()}`)
+
+  //mail is sent 
+  let mailOptions = {
+    from: process.env.FROM_MAIL,
+    to: doc.email,
+    subject: "Hermeneutics I - Online Quiz",
+    html: emailBody
+  }
+  transporter.sendMail(mailOptions, (error, response)=>{
+    if (error) {
+        console.log(`Error sending email to ${doc.name} through the address (${doc.email}). Time: ${new Date().toLocaleString()}`)
+        console.log(error)
+    } 
+    //Update database to signify that student has received email
+    student_db.update({_id: doc._id}, {$set: {email_status: "sent"}}, {})
+    console.log(`Email sent to ${doc.name} through the address (${doc.email}). Time: ${new Date().toLocaleString()}`)
+    //console.log(response)
+  })
+
+}
 
 module.exports = admin
