@@ -11,7 +11,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 require('dotenv').config({path: path.join(__dirname, '..', '.env')});
-
+admin.use(cookieParser())
 //include file reader/writer
 const fs = require('fs');
 
@@ -42,7 +42,7 @@ const transporter = nodemailer.createTransport({
 //Include mailgen for styling email
 const Mailgen = require('mailgen');
 const mailGenerator = new Mailgen({
-    theme: 'neopolitan',
+    theme: 'cerberus',
     product: {
         name: 'Jos, ECWA Theological Seminary',
         link: 'http://www.jets.edu.ng'
@@ -54,14 +54,20 @@ admin.use(session({secret: "jets", saveUninitialized: true, resave: true}))
 //admin.use(bodyParser.urlencoded({extended: true}));
 //admin.use(cookieParser())
 //variable to track sessions with
-var sessionID;
+var sessionID = "0";
 
 /*
 *  GET REQUESTS
 */
 //checks if session is open, if it is not, a redirect is triggered
 admin.get('/session', (request, response) => {
-  if(sessionID === request.cookies["AdminToken"]){
+  let AdminToken;
+  
+  try{
+    AdminToken = request.cookies["AdminToken"]
+  }
+  catch(error){}
+  if(sessionID === AdminToken){
     response.send({status: "OK"})
   }
   else{
@@ -78,6 +84,7 @@ admin.get('/log-out', (request, response) => {
       response.send({status: "FAILED"})
     }
     console.log(`Successful Admin log out confirmed. Time: ${new Date().toLocaleString()}`)
+    sessionID = "0"
     response.send({status: "OK"})
   })
 })
@@ -372,7 +379,7 @@ function sendEmail(doc = {
         'Calvary greetings to you in Jesus\' name.',
         `These are your log in details for the Hermeneutics I online quiz. Keep them safe.`,
         `USER ID: ${doc.student_id}`,
-        `PASSWORD: ${doc.password}.`,
+        `PASSWORD: ${doc.password}`,
         `It is of importance that you use a computer and not a phone to write this quiz, preferably with a chrome browser.`
       ],
       action: [
@@ -407,14 +414,16 @@ function sendEmail(doc = {
     html: emailBody
   }
   transporter.sendMail(mailOptions, (error, response)=>{
-    if (error) {
+    if(error) {
         console.log(`Error sending email to ${doc.name} through the address (${doc.email}). Time: ${new Date().toLocaleString()}`)
         console.log(error)
     } 
-    //Update database to signify that student has received email
-    student_db.update({_id: doc._id}, {$set: {email_status: "sent"}}, {})
-    console.log(`Email sent to ${doc.name} through the address (${doc.email}). Time: ${new Date().toLocaleString()}`)
-    //console.log(response)
+    else{
+      //Update database to signify that student has received email
+      student_db.update({_id: doc._id}, {$set: {email_status: "sent"}}, {})
+      console.log(`Email sent to ${doc.name} through the address (${doc.email}). Time: ${new Date().toLocaleString()}`)
+      //console.log(response)
+    }
   })
 
 }

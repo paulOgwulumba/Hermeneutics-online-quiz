@@ -71,7 +71,7 @@ student.post('/log-in', (request, response) => {
       response.end()
     }
     else{
-      student_db.findOne({student_id: user.student_id}, (error, document) => {
+      student_db.findOne({student_id: user.student_id}, async (error, document) => {
         if(error) throw error
         //checks for invalid student id
         if(document == null || document == undefined){
@@ -83,11 +83,11 @@ student.post('/log-in', (request, response) => {
           if(document.password === user.password){
             console.log(`Successfull log in to exam portal by Student ID: ${user.student_id}. Time: ${new Date().toLocaleString()}`)
             
-            request.session.cookie["AuthToken"] = request.session.id
+            // request.session.cookie["AuthToken"] = request.session.id
             response.cookie("AuthToken", request.session.id)
-            session_tracker_db.remove({name: document.name, _id: document._id}, {multi: true}, (error, number) => {
+            await session_tracker_db.remove({name: document.name, _id: document._id}, {multi: true}, async (error, number) => {
               if(error) throw error
-              session_tracker_db.insert({name: document.name, _id: document._id, session_id: request.session.id}, (error, doc) => {
+              await session_tracker_db.insert({name: document.name, _id: document._id, session_id: request.session.id}, (error, doc) => {
               })
             })
             //set cookie

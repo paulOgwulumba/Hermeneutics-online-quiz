@@ -1,6 +1,6 @@
 {"exam_status":"taken","time_left":7015,"_id":"9H9Yd4ydKxb2ealK","time_stamp":{"start":"10/20/2020, 1:55:49 PM","stop":"10/20/2020, 2:06:36 PM"},"current_question":27}
 {"exam_status":"taken","time_left":0,"_id":"WolGsUBFmIeCQAcC","time_stamp":{"start":"10/20/2020, 2:50:34 PM","stop":"10/20/2020, 2:54:39 PM"},"current_question":20}
-{"exam_status":"not taken","time_left":7200,"_id":"jV5SoYBBXa5pVlIO","time_stamp":{"start":"","stop":""},"current_question":0}
+{"exam_status":"taken","time_left":7121,"_id":"jV5SoYBBXa5pVlIO","time_stamp":{"start":"10/25/2020, 11:06:47 PM","stop":"10/25/2020, 11:14:44 PM"},"current_question":22}
 {"exam_status":"taken","time_left":0,"_id":"rmXtQ3QW1jFPJk4s","time_stamp":{"start":"10/20/2020, 2:46:11 PM","stop":"10/20/2020, 2:46:33 PM"},"current_question":4}
 {"exam_status":"taken","time_left":7101,"_id":"wzhAWA4LScGptRJM","time_stamp":{"stop":"10/19/2020, 11:31:04 PM"},"current_question":6}
 {"exam_status":"taken","time_left":6749,"_id":"y9CUYUEaa5ZdC9yf","time_stamp":{"stop":"10/20/2020, 12:32:49 AM"},"current_question":45}
