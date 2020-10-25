@@ -1,5 +1,6 @@
 //Exam status can either be 'not taken', 'in session' or 'taken'
 
+//set up express object and its dependencies
 const { response } = require('express');
 const express = require('express');
 const session = require('express-session');
@@ -11,15 +12,42 @@ const cookieParser = require('cookie-parser');
 
 require('dotenv').config({path: path.join(__dirname, '..', '.env')});
 
+//include file reader/writer
+const fs = require('fs');
+
 //crypto module for hashing strings
 const SHA256 = require('crypto-js/sha256');
 
-const Datastore = require('nedb');
 
+//set up nedb database objects
 const student_db = require('../database_objects/student_db')
 const answers_db = require('../database_objects/answers_db')
 const session_db = require('../database_objects/session_db')
 const session_tracker_db = require('../database_objects/session_tracker_db')
+
+//Include nodemailer for sending emails
+const nodemailer = require('nodemailer');
+const { getMaxListeners } = require('process');
+
+
+const transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    secure: true,
+    auth: {
+        user: process.env.FROM_MAIL,
+        pass: process.env.PASSWORD
+    }
+})
+
+//Include mailgen for styling email
+const Mailgen = require('mailgen');
+const mailGenerator = new Mailgen({
+    theme: 'salted',
+    product: {
+        name: 'Jos, ECWA Theological Seminary',
+        link: 'http://www.jets.edu.ng'
+    }
+})
 
 //set up session middleware
 admin.use(session({secret: "jets", saveUninitialized: true, resave: true}))
@@ -137,6 +165,48 @@ admin.get('/student/answer-sheet/:id', (request, response) => {
   }
 })
 
+//sends an email containing student username, password and exam link to student's email address
+admin.get('/student/send-email/:id', (request, response) => {
+  let _id = request.params.id
+
+  try{
+    student_db.findOne({_id: _id}, (error, doc) => {
+      if(error) throw error
+      if(doc !== null && doc!==undefined){
+        //set up  body of email to be sent
+        let email = {
+          body: {
+            greeting: "Hello",
+            name: doc.name,
+            intro: 'Calvary greetings to you in Jesus\' name',
+            action: {
+              instructions: [`These are your log in details for the Hermeneutics I online quiz. Keep them safe.\nUser ID: ${doc.student_id} \n password: ${doc.password}. \nMake sure you use a computer to write this quiz and not a phone.\nTo get started with the quiz, please click here.`, 'Fuck shit'],
+              button: {
+                color: '#22BC66',
+                text: "Go to exam web page.",
+                link: `localhost:3000/index.html?${doc._id}`
+              },
+              outro: `You can also copy this link and paste on your browser to get started: localhost:3000/index.html?${doc._id}`
+            }
+          }
+        }
+
+        //Generate a HTML email with the provided contents
+        let emailBody = mailGenerator.generate(email)
+
+        //preview generated email
+        fs.writeFileSync(path.join(__dirname, 'email-preview', `preview-${doc.name}.html`), emailBody, 'utf8');
+        console.log(`Preview email body for ${doc.name} generated successfully. Time: ${new Date().toLocaleString()}`)
+        response.send({status: "OK"})
+      }
+    })
+  }
+  catch(e){
+    console.log(`Failed to send email to Student ID: ${_id} due to database error. Time: ${new Date().toLocaleString()}`)
+    response.send({status: "FAILED"})
+  }
+
+})
 /*
 *  POST REQUESTS
 */
