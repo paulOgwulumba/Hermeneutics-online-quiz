@@ -61,8 +61,13 @@ var sessionID;
 */
 //checks if session is open, if it is not, a redirect is triggered
 admin.get('/session', (request, response) => {
-  if(sessionID === request.cookies["AdminToken"]){
-    response.send({status: "OK"})
+  if(request.cookies["AdminToken"]){
+    if(sessionID === request.cookies["AdminToken"]){
+      response.send({status: "OK"})
+    }
+    else{
+      response.send({status: "FAILED"})
+    }  
   }
   else{
     response.send({status: "FAILED"})
