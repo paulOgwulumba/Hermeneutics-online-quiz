@@ -388,13 +388,13 @@ function sendEmail(doc = {
             button: {
               
               text: "Go to exam log in page.",
-              link: `http://localhost:3000/index.html?${doc._id}`
+              link: `http://hermeneutics-online-quiz.herokuapp.com/index.html?${doc._id}`
             }
           }
         ],
         outro: [
           `You can also copy this link and paste on your browser to get started:`,
-          `http://localhost:3000/index.html?${doc._id}`
+          `http://hermeneutics-online-quiz.herokuapp.com/index.html?${doc._id}`
         ]
       }
   }
