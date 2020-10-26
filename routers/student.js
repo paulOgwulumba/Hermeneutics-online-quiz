@@ -26,13 +26,13 @@ student.use(bodyParser.urlencoded({extended: true}));
 student.use(cookieParser());
 
 //this appends a user and _id object unique to the session id to any incoming request
-student.use((request, response, next) => {
+student.use(async (request, response, next) => {
   //Get auth token from cookies
   let authToken = request.cookies["AuthToken"];
 
   //sorts through the session tracker database to see what user is attached to authToken
   try{
-    session_tracker_db.findOne({session_id: authToken}, (error, document) => {
+    await session_tracker_db.findOne({session_id: authToken}, (error, document) => {
       if(error) throw error
       //if a match is found, append the name of the student to the request and pass it on
       if(document !== null && document !== undefined){
@@ -147,13 +147,14 @@ student.get('/session', requireAuth, (request, response) => {
 student.get('/login-status', requireAuth, (request, response) => {
   let name = request.user;
   try{
-    session_tracker_db.findOne({name: name, session_id: request.session.id}, (error, document) => {
+    session_tracker_db.findOne({name: name, session_id: request.cookies['AuthToken']}, (error, document) => {
+      if(error) throw error
       if(document == null || document == undefined){
-        console.log(`Checked log in status for ${name} with session id: ${request.session.id}. Status failed, second-party already logged into account. Time: ${new Date().toLocaleString()}`)
+        console.log(`Checked log in status for ${name} with session AuthToken: ${request.cookies['AuthToken']}. Status failed, second-party already logged into account. Time: ${new Date().toLocaleString()}`)
         response.send({status: "FAILED"});
       }
       else{
-        console.log(`Checked log in status for ${name} session id: ${request.session.id}. Status is okay, no second-party logged into same account. Time: ${new Date().toLocaleString()}`)
+        console.log(`Checked log in status for ${name} session AuthToken: ${request.cookies['AuthToken']}. Status is okay, no second-party logged into same account. Time: ${new Date().toLocaleString()}`)
         response.send({status: "OK"});
       }
     })
@@ -182,7 +183,7 @@ student.get('/start-exam', (request, response) => {
         console.log(`Exam forcefully submitted because 2hr 15mins exam window has passed. _id:${_id}. Time: ${new Date().toLocaleString()}`)
       }
     })
-  }, 8100000)
+  }, 6300000)
   
   response.send({status: "OK"})
 })

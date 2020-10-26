@@ -289,7 +289,7 @@ admin.post('/student', (request, response) => {
             //session object for student
             let session_database = {
               exam_status: "not taken",         //value can either be 'not taken', 'in session' or 'taken'
-              time_left: 7200,
+              time_left: 5400,
               _id: document._id,
               time_stamp: {
                 start: "",

@@ -13,7 +13,7 @@ fetch(`/admin/student/${_id}`)
 const numberOfSections = 100;
 
 //duration of the exam in seconds
-var time = 7200;
+var time = 5400;
 
 //id for the timer handling the exam duration 
 var timer;
