@@ -39,6 +39,10 @@ body{
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+.shift{
+  line-height: 2.5rem;
+}
+
 label {
   font-size: 1.2rem;
 }
@@ -141,6 +145,10 @@ label {
   .exam-container{
     margin: 1rem;
     margin-top: 1.5rem;
+  }
+
+  .timer{
+    right: 1rem;
   }
 
   .question-type{
