@@ -30,7 +30,7 @@ tr{
   font-weight: 300;
   text-shadow: blue 1px 1px 1px 1px;
   z-index: 1000;
-  transform: translateY(4rem);
+  transform: translateY(2rem);
 }
 
 .buttons{
@@ -40,7 +40,7 @@ tr{
 
 .student-info{
   z-index: 1000;
-  transform: translateY(4rem);
+  transform: translateY(2rem);
   padding-right: 20%;
   padding-left: 20%;
 }

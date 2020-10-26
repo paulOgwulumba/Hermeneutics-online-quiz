@@ -34,7 +34,7 @@ fetch('/admin/students')
 
 
 //This function takes the data gotten from the server and displays it on the table
-function generateTable(data = []) {
+async function generateTable(data = []) {
   //The variable representing the body of the table
   let tbody = document.getElementById("tbody");
 
@@ -75,6 +75,26 @@ function generateTable(data = []) {
     email.textContent = row.email;
     mobile_number.textContent = row.mobile_number;
     buttonTd.appendChild(button)
+
+    //fetching student session info from server to apply appropriate color scheme to student name
+    //"not taken" = red, "in session" = orange, "taken" = green
+    await fetch(`/admin/student/session/${row._id}`)
+      .then(response => response.json())
+      .then(data => {
+        let status = data.exam_status
+        switch (status) {
+          case 'not taken':
+            name.className = 'text-danger'
+            break;
+          case 'in session':
+            name.className = 'text-warning'
+            break;
+          default:
+            name.className = 'text-success'
+            break;
+        }
+      })
+      .catch(e => {})
 
     //Appending the columns to the new row
     newRow.appendChild(s_n)
