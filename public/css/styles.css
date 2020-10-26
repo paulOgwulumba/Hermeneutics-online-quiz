@@ -89,6 +89,8 @@ label {
   transform: translateY(-1rem);
 }
 
+
+
 .overlay-mf {
   background-color: black;
   position: fixed;
@@ -102,6 +104,36 @@ label {
 
 .container{
   z-index: 1000;
+}
+
+@keyframes animate{
+  from {
+    color: orange;
+    font-size:  x-large;
+  }
+
+  to {
+    color: red;
+    font-size: xx-large;
+  }
+}
+
+.animate1{
+  animation-name: animate;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+}
+
+.animate2{
+  animation-name: animate;
+  animation-iteration-count: infinite;
+  animation-duration: .5s;
+}
+
+.animate3{
+  animation-name: animate;
+  animation-iteration-count: infinite;
+  animation-duration: .25s;
 }
 
 /*--Medium (md) devices (tablets, 768px and up)--*/
@@ -119,6 +151,23 @@ label {
   .submit-exam-box {
     margin-right: 1.8rem;
     transform: translateY(-2.1rem);
+  }
+  .style{
+    overflow-x: scroll;
+    max-width: 50%;
+  }
+  .style::-webkit-scrollbar {
+    background-color: transparent;
+  }
+
+  .style::-webkit-scrollbar-track {
+    background-color: transparent;
+    width: .5px;
+  }
+
+  .style::-webkit-scrollbar-thumb {
+    background-color: rgb(187, 184, 184);
+    width: .5px;
   }
 }
 

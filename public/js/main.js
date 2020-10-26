@@ -168,6 +168,36 @@ function setClock(seconds = 0){
     let secondNum = ((seconds % 3600) % 60);
     let second = secondNum > 9? secondNum : "0" + secondNum
     secondElement.textContent = second
+
+    //add animations
+    //if 5 minutes are left, change colour of timer to red
+    let timerBox = document.getElementById("timer-box")
+    if(seconds <= 300){
+      if(seconds > 120){
+        //if 'text-danger' is not already a class of timerBox, add it
+        if(!/text-danger/.test(timerBox.className)){
+          timerBox.className = "text-danger"
+        }
+      }
+      else if(seconds <= 120 && seconds > 60){
+        //if 'animate1' is not already a class of timerBox, add it
+        if(!/animate1/.test(timerBox.className)){
+          timerBox.className = "animate1"
+        }
+      }
+      else if(seconds <=60 && seconds > 20){
+        //if 'animate2' is not already a class of timerBox, add it
+        if(!/animate2/.test(timerBox.className)){
+          timerBox.className = "animate2"
+        }
+      }
+      else if(seconds <= 20){
+        //if 'animate3' is not already a class of timerBox, add it
+        if(!/animate3/.test(timerBox.className)){
+          timerBox.className = "animate3"
+        }
+      }
+    }
   }
   else{
     time = 0;

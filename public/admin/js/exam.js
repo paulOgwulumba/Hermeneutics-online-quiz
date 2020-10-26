@@ -2,7 +2,6 @@
 fetch('/admin/session')
   .then(response => response.json())
   .then(data => {
-    console.log(data)
     if(data.status !== "OK"){
       window.location.href = "./index.html"
     }
@@ -25,9 +24,14 @@ fetch(`/admin/student/${_id}`)
       hide('student-info')
     }
     else{
+      console.log(data)
       document.getElementById("student_name").textContent = data.name 
       document.getElementById("student_id").textContent = data.student_id
       try{
+        if(!data.email_status){
+          console.log("Hello")
+          data.email_status = 'Not sent'
+        }
         document.getElementById("email").textContent = data.email_status
       }
       catch(e) {}
