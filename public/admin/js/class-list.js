@@ -19,23 +19,10 @@ fetch('/admin/students')
   .then(response => response.json())
   .then(data => {
     classList = data;
-
     //sorts the classlist in alphabetical order
     classList.sort((a, b) => {
-      let firstA = a.name.split("")[0]
-      let firstB = b.name.split("")[0]
-
-      if(firstA === firstB){
-        return 0
-      }
-      else if(firstA > firstB){
-        return 1
-      }
-      else{
-        return -1;
-      }
+      return sort(a.name, b.name)
     })
-    
     //organises the classlist in a tabular form for display
     generateTable(classList)
   })
@@ -213,4 +200,28 @@ function shaveArray(id=""){
 function redirectToExams (id = ""){
   
   window.location.href = `./exam.html?${id}`
+}
+
+//this compares two strings a and b and returns 1 if a is greater than b in alphabetical order, returns 0 if they are 
+//equal and returns -1 if a is less than b
+function sort(a="", b=""){
+  let arrayA = a.split("")
+  let arrayB = b.split("")
+
+  if(arrayA[0] > arrayB[0]){
+    return 1
+  }
+  
+  if(arrayA[0] < arrayB[0]){
+    return -1
+  }
+
+  if(arrayA[0] === arrayB[0]){
+    if(a.length > 1 && b.length > 1){
+      return sort(a.substring(1), b.substring(1))
+    }
+    else{
+      return 0;
+    }
+  }
 }
