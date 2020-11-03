@@ -128,6 +128,12 @@ startExam.addEventListener("click", (event) => {
       displayDescription(1)
       show('submit-exam-box')
       fetch('/student/start-exam')
+        .then(response => response.json())
+        .then(data => {
+          if(data.status === "FAILED"){
+            window.location.href = './close.html'
+          }
+        })
     })
   
 })
@@ -377,6 +383,10 @@ function sendAnswers(current_question = 0){
       if(data.status === "LOG OUT"){
         alert("Someone else logged into this account. Log in again to continue")
         window.location.href = "./index.html"
+      }
+
+      if(data.status === "FAILED"){
+        window.location.href = './close.html'
       }
     })
 }
