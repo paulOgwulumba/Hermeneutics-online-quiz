@@ -24,7 +24,7 @@ form.addEventListener("submit", (event) => {
       console.log(data)
       if('status' in data){
         if(data.status === "OK"){
-          window.location.href = './exam.html?' + data._id
+          window.location.href = './wait.html?' + data._id
         }
         else{
           document.getElementById("error-message").textContent = "*" + data.status
