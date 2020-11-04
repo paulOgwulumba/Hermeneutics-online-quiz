@@ -29,7 +29,7 @@ fetch(`/admin/student/${_id}`)
       document.getElementById("student_id").textContent = data.student_id
       try{
         if(!data.email_status){
-          console.log("Hello")
+          //console.log("Hello")
           data.email_status = 'Not sent'
         }
         document.getElementById("email").textContent = data.email_status
