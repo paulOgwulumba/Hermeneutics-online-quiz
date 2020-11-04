@@ -169,32 +169,55 @@ student.get('/login-status', requireAuth, (request, response) => {
 student.get('/start-exam', (request, response) => {
   //gets database id attached to request
   let _id = request._id;
-  //updates exam session information
-  session_db.update({_id: _id}, {$set: {exam_status: 'in session', time_stamp: {start: new Date().toLocaleString()}}}, {})
-  console.log(`Student exam session started successfully. _id: ${_id}. Time: ${new Date().toLocaleString()}`)
-  //makes sure the exam session automatically ends after a maximum of 2hrs and 15 minutes if student does not end the exam
-  setTimeout(() => {
-    //get session information from database
-    session_db.findOne({_id: _id}, (error, document) => {
-      if(error) throw error
-      //check if exam has been submitted already and submit it if it hasn't already
-      if(document.exam_status !== 'taken'){
-        session_db.update({_id: _id}, {$set: {exam_status: 'taken', "time_stamp.stop": new Date().toLocaleString()}}, {})
-        console.log(`Exam forcefully submitted because 2hr 15mins exam window has passed. _id:${_id}. Time: ${new Date().toLocaleString()}`)
-      }
-    })
-  }, 6300000)
-  
-  response.send({status: "OK"})
+
+  //checks if student already took the exam
+  session_db.findOne({_id: _id}, (error, doc) => {
+    if(doc.exam_status === "taken"){
+      console.log(`Student exam start-exam attempt blocked because exam portal is closed. Time: ${new Date().toLocaleString()}`)
+      response.send({status: "FAILED"});
+    }
+    else{
+      //updates exam session information
+      session_db.update({_id: _id}, {$set: {exam_status: 'in session', time_stamp: {start: new Date().toLocaleString()}}}, {})
+      console.log(`Student exam session started successfully. _id: ${_id}. Time: ${new Date().toLocaleString()}`)
+      //makes sure the exam session automatically ends at exactly 10:35 am, 24th November if student does not end the exam
+      let time_stamp_milliseconds = new Date(2020, 10, 24, 10, 35).getTime() - new Date().getTime()
+      setTimeout(() => {
+        //get session information from database
+        session_db.findOne({_id: _id}, (error, document) => {
+          if(error) throw error
+          //check if exam has been submitted already and submit it if it hasn't already
+          if(document.exam_status !== 'taken'){
+            session_db.update({_id: _id}, {$set: {exam_status: 'taken', "time_stamp.stop": new Date().toLocaleString()}}, {})
+            console.log(`Exam forcefully submitted because 24th Nov 10:35am has been exceeded. _id:${_id}. Time: ${new Date().toLocaleString()}`)
+          }
+        })
+      }, time_stamp_milliseconds)
+      
+      response.send({status: "OK"})
+    }
+  })
+
 })
 
 //adds answers to the database
 student.post('/exam', requireAuth, (request, response) => {
   let _id = request._id;
-  session_db.update({_id: _id}, {$set: {current_question: request.body.current_question, time_left: request.body.secondsLeft}}, {})
-  answers_db.update({_id: _id}, {$set: {answers: request.body.answers}}, {})
-  console.log(`Student exam answers, current question and time left updated successfully. _id: ${_id}. Time: ${new Date().toLocaleString()}`)
-  response.send({status: "OK"})
+
+  //checks if the exam session is still open or not
+  session_db.findOne({_id: _id}, (error, doc) => {
+    if(error) throw error
+
+    if(doc.exam_status === "taken"){
+      response.send({status: "FAILED"})
+    }
+    else{
+      session_db.update({_id: _id}, {$set: {current_question: request.body.current_question, time_left: request.body.secondsLeft}}, {})
+      answers_db.update({_id: _id}, {$set: {answers: request.body.answers}}, {})
+      console.log(`Student exam answers, current question and time left updated successfully. _id: ${_id}. Time: ${new Date().toLocaleString()}`)
+      response.send({status: "OK"})
+    }
+  })
 })
 
 //ends the exam
