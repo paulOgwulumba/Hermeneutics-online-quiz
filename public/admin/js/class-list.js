@@ -76,6 +76,14 @@ async function generateTable(data = []) {
     mobile_number.textContent = row.mobile_number;
     buttonTd.appendChild(button)
 
+    // Changing colour of email address text to blue if email has been sent to student before
+    try{
+      if(row.email_status === "sent"){
+        email.className += 'text-info'
+      }
+    }
+    catch(e) {}
+
     //fetching student session info from server to apply appropriate color scheme to student name
     //"not taken" = red, "in session" = orange, "taken" = green
     await fetch(`/admin/student/session/${row._id}`)
