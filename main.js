@@ -4,10 +4,7 @@ const session = require('express-session')
 
 //Import routers
 const adminRouter = require('./routers/admin');
-const studentRouter = require('./routers/student')
-
-//import database object
-const Datastore = require('nedb');
+const studentRouter = require('./routers/student');
 
 //initialise environment variables
 require('dotenv').config({path: __dirname + '/.env'});

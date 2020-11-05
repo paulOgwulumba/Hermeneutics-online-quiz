@@ -8,17 +8,23 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
 student.use(cookieParser())
+//create database objects
+var student_db, answers_db, session_db, session_tracker_db;
 
-//keeps track of all the student sessions to make sure that no single student has two sessions running simultaneously
-//each document in this database has two fields: 'name' & 'session_id'
-const session_tracker_db =  require('../database_objects/session_tracker_db'); 
-//stores student information
-const student_db = require('../database_objects/student_db')
-//stores the answer sheet of students
-const answers_db = require('../database_objects/answers_db')
-//stores information about the exams taken by the student
-const session_db = require('../database_objects/session_db')
-
+//set up database
+var {Client} = require('../utils/utils');
+//connect to database
+Client.connect(err => {
+  if(err) throw err
+  //stores student information
+  student_db = Client.db().collection('student_base');
+  //stores the answer sheet of students
+  answers_db = Client.db().collection('answers_base');
+  //stores information about the exams taken by the student
+  session_db = Client.db().collection('session_base');
+  //keeps track of all the student sessions to make sure that no single student has two sessions running simultaneously
+  session_tracker_db = Client.db().collection('session_tracker_base');
+})
 
 //set up session middleware
 student.use(session({secret: "jets", saveUninitialized: true, resave: true}));

@@ -18,17 +18,30 @@ const fs = require('fs');
 //crypto module for hashing strings
 const SHA256 = require('crypto-js/sha256');
 
+//create database objects
+var student_db, answers_db, session_db, session_tracker_db;
 
-//set up nedb database objects
-const student_db = require('../database_objects/student_db')
-const answers_db = require('../database_objects/answers_db')
-const session_db = require('../database_objects/session_db')
-const session_tracker_db = require('../database_objects/session_tracker_db')
+
+//set up database
+var {Client} = require('../utils/utils');
+//connect to database
+Client.connect(err => {
+  if(err) throw err
+  student_db = Client.db().collection('student_base');
+  answers_db = Client.db().collection('answers_base');
+  session_db = Client.db().collection('session_base');
+  session_tracker_db = Client.db().collection('session_tracker_base');
+})
+
+// student_db = Client.db().collection('student_base');
+// answers_db = Client.db().collection('answers_base');
+// session_db = Client.db().collection('session_base');
+// session_tracker_db = Client.db().collection('session_tracker_base');
+
 
 //Include nodemailer for sending emails
 const nodemailer = require('nodemailer');
 const { getMaxListeners } = require('process');
-
 
 const transporter = nodemailer.createTransport({
     service: 'Gmail',
@@ -113,13 +126,11 @@ admin.get('/student/:id', (request, response) => {
 })
 
 //Sends the class list to the clientside
-admin.get('/students', (request, response) => {
+admin.get('/students', async (request, response) => {
   try{
-    student_db.find({}, (error, document)=> {
-      if(error) throw error;
-      console.log(`Student info sent to clientside. Time: ${new Date().toLocaleString()}`)
-      response.send(document)
-    })
+    let document = await student_db.find().toArray()
+    console.log(`Student info sent to clientside. Time: ${new Date().toLocaleString()}`)
+    response.send(document)
   }
   catch(error){
     console.error(error)
@@ -175,7 +186,6 @@ admin.get('/student/answer-sheet/:id', (request, response) => {
 //sends an email containing student username, password and exam link to student's email address
 admin.get('/student/send-email/:id', (request, response) => {
   let _id = request.params.id
-
   try{
     student_db.findOne({_id: _id}, (error, doc) => {
       if(error) throw error
@@ -210,7 +220,7 @@ admin.post('/log-in', (request, response) => {
 })
 
 //Adds student info to the student database
-admin.post('/student', (request, response) => {
+admin.post('/student', async (request, response) => {
   let obj = request.body;
   let objKeys = Object.keys(obj)
   
@@ -237,83 +247,81 @@ admin.post('/student', (request, response) => {
   //makes sure no already registered student has the same email address or student id
   
   try{
-    student_db.find({}, (error, documents) => {
-      if(error) throw error
-      let go = true           //if true, student is added to the database
-      trial: for(let doc of documents){
-        if(doc.student_id === obj.student_id){
-          console.log(`Attempt to add new student failed because student ID already exists. Time: ${new Date().toLocaleString()}`)
-          response.send({status: "ID"})
-          go = false;
-          break trial;
-        }
-        else if(doc.email === obj.email){
-          console.log(`Attempt to add new student failed because student email already exists. Time: ${new Date().toLocaleString()}`)
-          response.send({status: "EMAIL"})
-          go = false;
-          break trial;
-        }
+    let documents = await student_db.find().toArray()
+    let go = true           //if true, student is added to the database
+    trial: for(let doc of documents){
+      if(doc.student_id === obj.student_id){
+        console.log(`Attempt to add new student failed because student ID already exists. Time: ${new Date().toLocaleString()}`)
+        response.send({status: "ID"})
+        go = false;
+        break trial;
       }
-
-
-      if(go){
-        //add student to database
-        try{
-          student_db.insert(obj, (error, document) => {
-            if(error) throw error;
-            console.log(`New student added to student database. Time: ${new Date().toLocaleString()}`)
-            
-            //object to be added to answers database
-            let object = {_id: document._id, answers: {}}
-
-            //object to hold answers to all the questions
-            for(let i=1; i<=99; i++){
-              let answer =  "blank"
-              object.answers["question-" + i] = answer;
-            }
-
-            //answers database is updated 
-            answers_db.insert(object, (error, doc) => {
-              //if an error occurs while creating answer database, delete student info from student database
-              if(error){
-                console.log(`Student answers object failed to be added to answers database due to database error. Time: ${new Date().toLocaleString()}`)
-                student_db.remove({_id: document._id}, {}, (error, number) => {
-                  if(error) throw error
-                  console.log(`${number} student info deleted successfully to revert answer database error. Time: ${new Date().toLocaleString()}`);
-                })
-                throw error
-              }
-              console.log(`New student answer database created successfully. Time: ${new Date().toLocaleString()}`)
-            })
-
-            //session object for student
-            let session_database = {
-              exam_status: "not taken",         //value can either be 'not taken', 'in session' or 'taken'
-              time_left: 5400,
-              _id: document._id,
-              time_stamp: {
-                start: "",
-                stop: ""
-              },
-              current_question: 0
-            }
-
-            session_db.insert(session_database, (error, docs) => {
-              if(error) throw error
-              console.log(`New student exam session database created successfully. Time: ${new Date().toLocaleString()}`)
-            })
-
-            response.send({status: "OK"})
-          })
-
-        }
-        catch(e){
-          console.log(`New student attempted to be added but failed because of database error. Time: ${new Date().toLocaleString()}\n.${e}`)
-          response.send({status: "FAILED"})
-        }
+      else if(doc.email === obj.email){
+        console.log(`Attempt to add new student failed because student email already exists. Time: ${new Date().toLocaleString()}`)
+        response.send({status: "EMAIL"})
+        go = false;
+        break trial;
       }
-      
-    })
+    }
+
+    if(go){
+      //add student to database
+      try{
+        let document = await student_db.insertOne(obj);
+        
+        console.log(`New student added to student database. Time: ${new Date().toLocaleString()}`)
+        //object to be added to answers database
+        let object = {_id: document.insertedId, answers: {}}
+
+        //object to hold answers to all the questions
+        for(let i=1; i<=99; i++){
+          let answer =  "blank"
+          object.answers["question-" + i] = answer;
+        }
+        console.log(document.insertedId)
+        //answers database is updated 
+        await answers_db.insertOne(object).catch(error => {
+          //if an error occurs while creating answer database, delete student info from student database
+          console.log(`Student answers object failed to be added to answers database due to database error. Time: ${new Date().toLocaleString()}`)
+          student_db.deleteOne({_id: document.insertedId})
+          console.log(`${number} student info deleted successfully to revert answer database error. Time: ${new Date().toLocaleString()}`);
+          throw error
+        })
+        
+        console.log(`New student answer database created successfully. Time: ${new Date().toLocaleString()}`)
+    
+
+        //session object for student
+        let session_database = {
+          exam_status: "not taken",         //value can either be 'not taken', 'in session' or 'taken'
+          time_left: 5400,
+          _id: document.insertedId,
+          time_stamp: {
+            start: "",
+            stop: ""
+          },
+          current_question: 0
+        }
+
+        await session_db.insertOne(session_database).catch(error => {
+          //if an error occurs while creating answer database, delete student info from student database
+          console.log(`Student session object failed to be added to answers database due to database error. Time: ${new Date().toLocaleString()}`)
+          student_db.deleteOne({_id: document.insertedId})
+          answers_db.deleteOne({_id: document.insertedId})
+          console.log(`Student info and answer sheet deleted successfully to revert session database error. Time: ${new Date().toLocaleString()}`);
+          throw error
+        })
+        console.log(`New student exam session database created successfully. Time: ${new Date().toLocaleString()}`)
+
+        response.send({status: "OK"})
+
+      }
+      catch(e){
+        console.log(`New student attempted to be added but failed because of database error. Time: ${new Date().toLocaleString()}\n.${e}`)
+        response.send({status: "FAILED"})
+      }
+    }
+    
   }
   catch(e){
     console.log(`New student attempted to be added but failed because of database error. Time: ${new Date().toLocaleString()}\n.${e}`)
@@ -330,29 +338,20 @@ admin.post('/student', (request, response) => {
 admin.delete('/student', (request, response) => {
   try{
     //delete student personal info
-    student_db.remove({_id: request.body._id}, {}, (error, number) => {
-      if(error) throw error
-      console.log(`${number} student personal info deleted successfully. Time: ${new Date().toLocaleString()}`)
-    })
+    student_db.deleteOne({_id: request.body._id});
+    console.log(`${number} student personal info deleted successfully. Time: ${new Date().toLocaleString()}`)
 
     //delete student answer sheet
-    answers_db.remove({_id: request.body._id}, {}, (error, number) => {
-      if(error) throw error
-      console.log(`${number} student answer-sheet info deleted successfully. Time: ${new Date().toLocaleString()}`)
-    })
+    answers_db.remove({_id: request.body._id})
+    console.log(`${number} student answer-sheet info deleted successfully. Time: ${new Date().toLocaleString()}`)
 
     //delete student exam session state
-    session_db.remove({_id: request.body._id}, {}, (error, number) => {
-      if(error) throw error;
-      console.log(`${number} student exam session state deleted successfully. Time: ${new Date().toLocaleString()}`)
-    })
+    session_db.remove({_id: request.body._id})
+    console.log(`${number} student exam session state deleted successfully. Time: ${new Date().toLocaleString()}`)
 
     //delete student exam session tracker database object
-    session_tracker_db.remove({_id: request.body._id}, {}, (error, number) => {
-      if(error) throw error;
-      console.log(`${number} student exam session tracker object deleted successfully. Time: ${new Date().toLocaleString()}`)
-    })
-
+    session_tracker_db.remove({_id: request.body._id})
+    console.log(`${number} student exam session tracker object deleted successfully. Time: ${new Date().toLocaleString()}`)
 
     response.send({status: "OK"})
   }
@@ -427,5 +426,6 @@ function sendEmail(doc = {
   })
 
 }
+
 
 module.exports = admin
