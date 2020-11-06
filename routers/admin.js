@@ -24,6 +24,7 @@ var student_db, answers_db, session_db, session_tracker_db;
 
 //set up database
 var {Client} = require('../utils/utils');
+const { ObjectID, ObjectId } = require('mongodb');
 //connect to database
 Client.connect(err => {
   if(err) throw err
@@ -103,20 +104,18 @@ admin.get('/log-out', (request, response) => {
 })
 
 //Sends the personal information of a student to the clientside
-admin.get('/student/:id', (request, response) => {
+admin.get('/student/:id', async (request, response) => {
   let _id = request.params.id;
   try{
-    student_db.findOne({_id: _id}, (error, document) => {
-      if(error) throw error;
-      if(document !== null & document !== undefined){
-        console.log(`Student information sent to clientside. Time: ${new Date().toLocaleString()}`);
-        response.send(document)
-      }
-      else{
-        console.log(`Student information attempted to be extracted from database but failed because no information matching given ID was found. Time: ${new Date().toLocaleString()}`);
-        response.status(404).send({status: "FAILED"})
-      }
-    })
+    let document = await student_db.findOne({_id: ObjectId(_id)})
+    if(document !== null & document !== undefined){
+      console.log(`Student information sent to clientside. Time: ${new Date().toLocaleString()}`);
+      response.send(document)
+    }
+    else{
+      console.log(`Student information attempted to be extracted from database but failed because no information matching given ID was found. Time: ${new Date().toLocaleString()}`);
+      response.status(404).send({status: "FAILED"})
+    }
   }
   catch(error){
     console.log(`Student information attempted to be extracted from database but failed because of database error. Time: ${new Date().toLocaleString()}`);
@@ -138,20 +137,18 @@ admin.get('/students', async (request, response) => {
 })
 
 //sends a student's exam session state to the clientside
-admin.get('/student/session/:id', (request, response) => {
+admin.get('/student/session/:id', async (request, response) => {
   let _id = request.params.id;
   try{
-    session_db.findOne({_id: _id}, (error, document) => {
-      if(error) throw error
-      if(document !== null & document !== undefined){
-        console.log(`Student exam session info sent to clientside. Time: ${new Date().toLocaleString()}`);
-        response.send(document)
-      }
-      else{
-        console.log(`Student exam session info attempted to be extracted from database but failed because no information matching given ID was found. Time: ${new Date().toLocaleString()}`);
-        response.status(404).send({status: "FAILED"})
-      }
-    })
+    let document = await session_db.findOne({_id: ObjectId(_id)});
+    if(document !== null & document !== undefined){
+      console.log(`Student exam session info sent to clientside. Time: ${new Date().toLocaleString()}`);
+      response.send(document)
+    }
+    else{
+      console.log(`Student exam session info attempted to be extracted from database but failed because no information matching given ID was found. Time: ${new Date().toLocaleString()}`);
+      response.status(404).send({status: "FAILED"})
+    }
   }
   catch(error){
     console.log(`Student exam session info attempted to be extracted from database but failed because of database error. Time: ${new Date().toLocaleString()}`);
@@ -161,20 +158,18 @@ admin.get('/student/session/:id', (request, response) => {
 })
 
 //sends a student's exam answer sheet to the clientside
-admin.get('/student/answer-sheet/:id', (request, response) => {
+admin.get('/student/answer-sheet/:id', async (request, response) => {
   let _id = request.params.id;
   try{
-    answers_db.findOne({_id: _id}, (error, document) => {
-      if(error) throw error
-      if(document !== null & document !== undefined){
-        console.log(`Student answer sheet sent to clientside. Time: ${new Date().toLocaleString()}`);
-        response.send(document)
-      }
-      else{
-        console.log(`Student answer sheet attempted to be extracted from database but failed because no information matching given ID was found. Time: ${new Date().toLocaleString()}`);
-        response.status(404).send({status: "FAILED"})
-      }
-    })
+    let document = await answers_db.findOne({_id: ObjectId(_id)});
+    if(document !== null & document !== undefined){
+      console.log(`Student answer sheet sent to clientside. Time: ${new Date().toLocaleString()}`);
+      response.send(document)
+    }
+    else{
+      console.log(`Student answer sheet attempted to be extracted from database but failed because no information matching given ID was found. Time: ${new Date().toLocaleString()}`);
+      response.status(404).send({status: "FAILED"})
+    }
   }
   catch(error){
     console.log(`Student answer sheet attempted to be extracted from database but failed because of database error. Time: ${new Date().toLocaleString()}`);
@@ -184,16 +179,14 @@ admin.get('/student/answer-sheet/:id', (request, response) => {
 })
 
 //sends an email containing student username, password and exam link to student's email address
-admin.get('/student/send-email/:id', (request, response) => {
+admin.get('/student/send-email/:id', async (request, response) => {
   let _id = request.params.id
   try{
-    student_db.findOne({_id: _id}, (error, doc) => {
-      if(error) throw error
-      if(doc !== null && doc!==undefined){
-        sendEmail(doc)
-        response.send({status: "OK"})
-      }
-    })
+    let doc = await student_db.findOne({_id: ObjectId(_id)});
+    if(doc !== null && doc!==undefined){
+      sendEmail(doc)
+      response.send({status: "OK"})
+    }
   }
   catch(e){
     console.log(`Failed to send email to Student ID: ${_id} due to database error. Time: ${new Date().toLocaleString()}`)
@@ -201,6 +194,7 @@ admin.get('/student/send-email/:id', (request, response) => {
   }
 
 })
+
 /*
 *  POST REQUESTS
 */
@@ -278,12 +272,12 @@ admin.post('/student', async (request, response) => {
           let answer =  "blank"
           object.answers["question-" + i] = answer;
         }
-        console.log(document.insertedId)
+        
         //answers database is updated 
         await answers_db.insertOne(object).catch(error => {
           //if an error occurs while creating answer database, delete student info from student database
           console.log(`Student answers object failed to be added to answers database due to database error. Time: ${new Date().toLocaleString()}`)
-          student_db.deleteOne({_id: document.insertedId})
+          student_db.deleteOne({_id: ObjectId(document.insertedId)})
           console.log(`${number} student info deleted successfully to revert answer database error. Time: ${new Date().toLocaleString()}`);
           throw error
         })
@@ -306,8 +300,8 @@ admin.post('/student', async (request, response) => {
         await session_db.insertOne(session_database).catch(error => {
           //if an error occurs while creating answer database, delete student info from student database
           console.log(`Student session object failed to be added to answers database due to database error. Time: ${new Date().toLocaleString()}`)
-          student_db.deleteOne({_id: document.insertedId})
-          answers_db.deleteOne({_id: document.insertedId})
+          student_db.deleteOne({_id: ObjectId(document.insertedId)})
+          answers_db.deleteOne({_id: ObjectId(document.insertedId)})
           console.log(`Student info and answer sheet deleted successfully to revert session database error. Time: ${new Date().toLocaleString()}`);
           throw error
         })
@@ -336,21 +330,23 @@ admin.post('/student', async (request, response) => {
 */
 //deletes a student's info from the database
 admin.delete('/student', (request, response) => {
+  let _id = request.body._id;
+  let number = 1;
   try{
     //delete student personal info
-    student_db.deleteOne({_id: request.body._id});
+    student_db.deleteOne({_id: ObjectId(_id)});
     console.log(`${number} student personal info deleted successfully. Time: ${new Date().toLocaleString()}`)
 
     //delete student answer sheet
-    answers_db.remove({_id: request.body._id})
+    answers_db.deleteOne({_id: ObjectId(_id)})
     console.log(`${number} student answer-sheet info deleted successfully. Time: ${new Date().toLocaleString()}`)
 
     //delete student exam session state
-    session_db.remove({_id: request.body._id})
+    session_db.deleteOne({_id: ObjectId(_id)})
     console.log(`${number} student exam session state deleted successfully. Time: ${new Date().toLocaleString()}`)
 
     //delete student exam session tracker database object
-    session_tracker_db.remove({_id: request.body._id})
+    session_tracker_db.deleteOne({_id: ObjectId(_id)})
     console.log(`${number} student exam session tracker object deleted successfully. Time: ${new Date().toLocaleString()}`)
 
     response.send({status: "OK"})
