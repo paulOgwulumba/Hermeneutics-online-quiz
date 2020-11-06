@@ -92,7 +92,7 @@ async function generateTable(data = []) {
         let status = data.exam_status
         switch (status) {
           case 'not taken':
-            name.className = 'text-danger'
+            name.className = ''
             break;
           case 'in session':
             name.className = 'text-warning'
