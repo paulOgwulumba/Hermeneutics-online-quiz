@@ -90,12 +90,9 @@ fetch('/student/session')
     else if(data.status === "CONTINUE"){
       //answers and time left to be displayed on screen
       let toBeDisplayed = {}
-      toBeDisplayed.secondsLeft = data.session.time_left;
+      toBeDisplayed.secondsLeft = Math.round(data.session.time_stamp.start_uts + 5400 - (new Date().getTime() / 1000)); //5400
       toBeDisplayed.answers = data.answers
       toBeDisplayed.currentQuestion = data.session.current_question;
-      if(toBeDisplayed.currentQuestion === 0){
-        toBeDisplayed.currentQuestion++
-      }
 
       if(toBeDisplayed.currentQuestion === 0){
         toBeDisplayed.currentQuestion = 1;

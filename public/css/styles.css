@@ -97,7 +97,9 @@ label {
   transform: translateY(-1rem);
 }
 
-
+.display-4{
+  font-size: 1.8rem;
+}
 
 .overlay-mf {
   background-color: black;
@@ -180,6 +182,17 @@ label {
   .style::-webkit-scrollbar-thumb {
     background-color: rgb(187, 184, 184);
     width: .5px;
+  }
+
+  .display-4{
+    font-size: 1.4rem;
+  }
+}
+
+/**Small (sm) devices (landscape phones, 576px and down)**/
+@media (max-width: 576px) { 
+  .display-4 {
+    font-size: 1.2rem;
   }
 }
 

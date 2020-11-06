@@ -19,7 +19,7 @@ const fs = require('fs');
 const SHA256 = require('crypto-js/sha256');
 
 //create database objects
-var student_db, answers_db, session_db, session_tracker_db;
+var student_db, answers_db, session_db, session_tracker_db, admin_session_db;
 
 
 //set up database
@@ -32,12 +32,9 @@ Client.connect(err => {
   answers_db = Client.db().collection('answers_base');
   session_db = Client.db().collection('session_base');
   session_tracker_db = Client.db().collection('session_tracker_base');
+  admin_session_db = Client.db().collection('admin_session_base')
 })
 
-// student_db = Client.db().collection('student_base');
-// answers_db = Client.db().collection('answers_base');
-// session_db = Client.db().collection('session_base');
-// session_tracker_db = Client.db().collection('session_tracker_base');
 
 
 //Include nodemailer for sending emails
@@ -74,29 +71,34 @@ var sessionID = "0";
 *  GET REQUESTS
 */
 //checks if session is open, if it is not, a redirect is triggered
-admin.get('/session', (request, response) => {
+admin.get('/session', async (request, response) => {
   let AdminToken;
   
   try{
-    AdminToken = request.cookies["AdminToken"]
+    AdminToken = request.cookies["AdminToken"];
   }
   catch(error){}
-  if(sessionID === AdminToken){
+
+  let session = await admin_session_db.findOne({sessionID: AdminToken})
+
+  if(session !== null && session !== undefined){
     response.send({status: "OK"})
   }
   else{
+    console.log(`Admin session cancelled because admin is not logged in. Time: ${new Date().toLocaleString()}`)
     response.send({status: "FAILED"})
   }
 })
 
 //cancels present session and redirect to log in page is triggered
-admin.get('/log-out', (request, response) => {
-  request.session.destroy( error => {
+admin.get('/log-out', async (request, response) => {
+  request.session.destroy(async error => {
     if(error){
       console.error(error)
       console.log(`Admin log out failed. Time: ${new Date().toLocaleString()}`)
       response.send({status: "FAILED"})
     }
+    await admin_session_db.deleteMany({});
     console.log(`Successful Admin log out confirmed. Time: ${new Date().toLocaleString()}`)
     sessionID = "0"
     response.send({status: "OK"})
@@ -199,11 +201,13 @@ admin.get('/student/send-email/:id', async (request, response) => {
 *  POST REQUESTS
 */
 //validates the log in entries for the admin page
-admin.post('/log-in', (request, response) => {
+admin.post('/log-in', async (request, response) => {
   if(request.body.username === process.env.ADMIN_USERNAME && request.body.password === process.env.ADMIN_PASSWORD){
     console.log(`Successful Admin log in confirmed. Time: ${new Date().toLocaleString()}`)
     //creates a new session to be tracked
-    sessionID = request.session.id
+    sessionID = request.session.id;
+    await admin_session_db.deleteMany({});
+    await admin_session_db.insertOne({sessionID})
     response.cookie("AdminToken", sessionID)
     response.send({status: "OK"})
   }
@@ -292,7 +296,9 @@ admin.post('/student', async (request, response) => {
           _id: document.insertedId,
           time_stamp: {
             start: "",
-            stop: ""
+            stop: "",
+            start_uts: "",
+            stop_uts: ""
           },
           current_question: 0
         }
@@ -415,7 +421,7 @@ function sendEmail(doc = {
     } 
     else{
       //Update database to signify that student has received email
-      student_db.update({_id: doc._id}, {$set: {email_status: "sent"}}, {})
+      student_db.updateOne({_id: ObjectId(doc._id)}, {$set: {email_status: "sent"}}, {})
       console.log(`Email sent to ${doc.name} through the address (${doc.email}). Time: ${new Date().toLocaleString()}`)
       //console.log(response)
     }

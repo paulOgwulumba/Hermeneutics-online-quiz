@@ -13,6 +13,7 @@ var student_db, answers_db, session_db, session_tracker_db;
 
 //set up database
 var {Client} = require('../utils/utils');
+const { ObjectId } = require('mongodb');
 //connect to database
 Client.connect(err => {
   if(err) throw err
@@ -38,15 +39,13 @@ student.use(async (request, response, next) => {
 
   //sorts through the session tracker database to see what user is attached to authToken
   try{
-    await session_tracker_db.findOne({session_id: authToken}, (error, document) => {
-      if(error) throw error
-      //if a match is found, append the name of the student to the request and pass it on
-      if(document !== null && document !== undefined){
-        request.user = document.name;
-        request._id = document._id;
-      }
-      next()
-    })
+    let document = await session_tracker_db.findOne({session_id: authToken})
+    //if a match is found, append the name of the student to the request and pass it on
+    if(document !== null && document !== undefined){
+      request.user = document.name;
+      request._id = document._id;
+    }
+    next()
   }
   catch(error){
     console.error(error)
@@ -67,7 +66,7 @@ const requireAuth = (request, response, next) => {
 }
 
 //gets a student's log in attempt and runs authentication on it
-student.post('/log-in', (request, response) => {
+student.post('/log-in', async (request, response) => {
   let user = request.body;
   try{
     //checks for empty username and/or password
@@ -77,35 +76,31 @@ student.post('/log-in', (request, response) => {
       response.end()
     }
     else{
-      student_db.findOne({student_id: user.student_id}, async (error, document) => {
-        if(error) throw error
-        //checks for invalid student id
-        if(document == null || document == undefined){
-          console.log(`Failed log in attempt to exam portal by invalid Student ID: ${user.student_id}. Time: ${new Date().toLocaleString()}`)
-          response.send({status: "Invalid student ID"});
+      let document = await student_db.findOne({student_id: user.student_id});
+      //checks for invalid student id
+      if(document == null || document == undefined){
+        console.log(`Failed log in attempt to exam portal by invalid Student ID: ${user.student_id}. Time: ${new Date().toLocaleString()}`)
+        response.send({status: "Invalid student ID"});
+      }
+      else{
+        //correct username and password
+        if(document.password === user.password){
+          console.log(`Successfull log in to exam portal by Student ID: ${user.student_id}. Time: ${new Date().toLocaleString()}`)
+          
+          //set cookie
+          response.cookie("AuthToken", request.session.id);
+
+          //delete former instances of session tracker if any
+          await session_tracker_db.deleteMany({name: document.name, _id: document._id});
+          await session_tracker_db.insertOne({name: document.name, _id: document._id, session_id: request.session.id})
+          
+          response.send({status: "OK", _id: document._id})
         }
         else{
-          //correct username and password
-          if(document.password === user.password){
-            console.log(`Successfull log in to exam portal by Student ID: ${user.student_id}. Time: ${new Date().toLocaleString()}`)
-            
-            // request.session.cookie["AuthToken"] = request.session.id
-            response.cookie("AuthToken", request.session.id)
-            await session_tracker_db.remove({name: document.name, _id: document._id}, {multi: true}, async (error, number) => {
-              if(error) throw error
-              await session_tracker_db.insert({name: document.name, _id: document._id, session_id: request.session.id}, (error, doc) => {
-              })
-            })
-            //set cookie
-            
-            response.send({status: "OK", _id: document._id})
-          }
-          else{
-              console.log(`Failed log in attempt to exam portal by Student ID: ${user.student_id} due to wrong password. Time: ${new Date().toLocaleString()}`)
-              response.send({status: "Incorrect password"})
-          }
+            console.log(`Failed log in attempt to exam portal by Student ID: ${user.student_id} due to wrong password. Time: ${new Date().toLocaleString()}`)
+            response.send({status: "Incorrect password"})
         }
-      })
+      }
   
     }
   }
@@ -117,30 +112,26 @@ student.post('/log-in', (request, response) => {
 })
 
 //checks if the student is logged in or not
-student.get('/session', requireAuth, (request, response) => {
+student.get('/session', requireAuth, async (request, response) => {
   let _id = request._id;
   try{
-    session_db.findOne({_id: _id}, (error, document) => {
-      if(error) throw error;
-      //exam not already in session approve start of exam
-      if(document.exam_status === 'not taken'){
-        console.log(`Student (${request.user}) exam initializing attempt approved. Time: ${new Date().toLocaleString()} `);
-        response.send({status: "OK"})
-      }
-      //exam in session, approve continuation of exam
-      else if(document.exam_status === 'in session'){
-        answers_db.findOne({_id: _id}, (error, doc) => {
-          if(error) throw error
-          console.log(`Student (${request.user}) exam continuation attempt approved. Time: ${new Date().toLocaleString()} `);
-          response.send({status: "CONTINUE", session: document, answers: doc.answers});
-        })
-      }
-      //exam session already ended, disapprove
-      else{
-        console.log(`Student (${request.user}) exam initialization attempt blocked because he/she already took the exam. Time: ${new Date().toLocaleString()} `);
-        response.send({status: "TAKEN"})
-      }
-    })
+    let document = await session_db.findOne({_id: ObjectId(_id)});
+    //exam not already in session approve start of exam
+    if(document.exam_status === 'not taken'){
+      console.log(`Student (${request.user}) exam initializing attempt approved. Time: ${new Date().toLocaleString()} `);
+      response.send({status: "OK"})
+    }
+    //exam in session, approve continuation of exam
+    else if(document.exam_status === 'in session'){
+      let doc = await answers_db.findOne({_id: ObjectId(_id)})
+      console.log(`Student (${request.user}) exam continuation attempt approved. Time: ${new Date().toLocaleString()} `);
+      response.send({status: "CONTINUE", session: document, answers: doc.answers});
+    }
+    //exam session already ended, disapprove
+    else{
+      console.log(`Student (${request.user}) exam initialization attempt blocked because he/she already took the exam. Time: ${new Date().toLocaleString()} `);
+      response.send({status: "TAKEN"})
+    }
   }
   catch(error){
     console.error(error)
@@ -150,20 +141,20 @@ student.get('/session', requireAuth, (request, response) => {
 })
 
 //checks if multiple people logged into one student account or not
-student.get('/login-status', requireAuth, (request, response) => {
+student.get('/login-status', requireAuth, async (request, response) => {
   let name = request.user;
   try{
-    session_tracker_db.findOne({name: name, session_id: request.cookies['AuthToken']}, (error, document) => {
-      if(error) throw error
-      if(document == null || document == undefined){
-        console.log(`Checked log in status for ${name} with session AuthToken: ${request.cookies['AuthToken']}. Status failed, second-party already logged into account. Time: ${new Date().toLocaleString()}`)
-        response.send({status: "FAILED"});
-      }
-      else{
-        console.log(`Checked log in status for ${name} session AuthToken: ${request.cookies['AuthToken']}. Status is okay, no second-party logged into same account. Time: ${new Date().toLocaleString()}`)
-        response.send({status: "OK"});
-      }
-    })
+    //checks if log-in info of this user matches what is in the database already
+    let document = await session_tracker_db.findOne({name: name, session_id: request.cookies['AuthToken']});
+
+    if(document == null || document == undefined){
+      console.log(`Checked log in status for ${name} with session AuthToken: ${request.cookies['AuthToken']}. Status failed, second-party already logged into account. Time: ${new Date().toLocaleString()}`)
+      response.send({status: "FAILED"});
+    }
+    else{
+      console.log(`Checked log in status for ${name} session AuthToken: ${request.cookies['AuthToken']}. Status is okay, no second-party logged into same account. Time: ${new Date().toLocaleString()}`)
+      response.send({status: "OK"});
+    }
   }
   catch(err){
     console.error(error)
@@ -171,68 +162,86 @@ student.get('/login-status', requireAuth, (request, response) => {
   }
 })
 
-//starts the exam and creates a timeout that terminates the exam after 2hr 15 mins window is passed
-student.get('/start-exam', (request, response) => {
+//starts the exam and creates a timeout that terminates the exam after time limit window is passed
+student.get('/start-exam', async (request, response) => {
   //gets database id attached to request
   let _id = request._id;
 
   //checks if student already took the exam
-  session_db.findOne({_id: _id}, (error, doc) => {
-    if(doc.exam_status === "taken"){
-      console.log(`Student exam start-exam attempt blocked because exam portal is closed. Time: ${new Date().toLocaleString()}`)
-      response.send({status: "FAILED"});
-    }
-    else{
+  let doc = await session_db.findOne({_id: ObjectId(_id)})
+  if(doc.exam_status === "taken"){
+    console.log(`Student exam start-exam attempt blocked because exam portal is closed. Time: ${new Date().toLocaleString()}`)
+    response.send({status: "FAILED"});
+  }
+  else{
+    try{
       //updates exam session information
-      session_db.update({_id: _id}, {$set: {exam_status: 'in session', time_stamp: {start: new Date().toLocaleString()}}}, {})
+      session_db.updateOne({ _id: ObjectId(_id) }, { $set: {exam_status: 'in session', "time_stamp.start": new Date().toLocaleString(), "time_stamp.start_uts": new Date().getTime()/1000}}, {});
       console.log(`Student exam session started successfully. _id: ${_id}. Time: ${new Date().toLocaleString()}`)
+      
       //makes sure the exam session automatically ends at exactly 10:35 am, 24th November if student does not end the exam
       let time_stamp_milliseconds = new Date(2020, 10, 24, 10, 35).getTime() - new Date().getTime()
-      setTimeout(() => {
+      setTimeout(async () => {
         //get session information from database
-        session_db.findOne({_id: _id}, (error, document) => {
-          if(error) throw error
-          //check if exam has been submitted already and submit it if it hasn't already
-          if(document.exam_status !== 'taken'){
-            session_db.update({_id: _id}, {$set: {exam_status: 'taken', "time_stamp.stop": new Date().toLocaleString()}}, {})
-            console.log(`Exam forcefully submitted because 24th Nov 10:35am has been exceeded. _id:${_id}. Time: ${new Date().toLocaleString()}`)
-          }
-        })
-      }, time_stamp_milliseconds)
-      
-      response.send({status: "OK"})
-    }
-  })
+        let document = await session_db.findOne({_id: ObjectId(_id)})
 
+        //check if exam has been submitted already and submit it if it hasn't
+        if(document.exam_status !== 'taken'){
+          session_db.updateOne({ _id: ObjectId(_id) }, { $set: {exam_status: 'taken', "time_stamp.stop": new Date().toLocaleString(), "time_stamp.stop_uts": new Date().getTime() / 1000} }, {})
+          console.log(`Exam forcefully submitted because 24th Nov 10:35am has been exceeded. _id:${_id}. Time: ${new Date().toLocaleString()}`)
+        }
+      }, time_stamp_milliseconds);
+      
+      response.send({status: "OK"});
+    }
+    catch(error){
+      console.log(`Database error while trying to start student exam. id: ${_id}. Time: ${new Date().toLocaleString()}`);
+      console.error(error);
+      response.status(404).send({status: "FAILED"});
+    }
+  }
 })
 
 //adds answers to the database
-student.post('/exam', requireAuth, (request, response) => {
+student.post('/exam', requireAuth, async (request, response) => {
   let _id = request._id;
 
-  //checks if the exam session is still open or not
-  session_db.findOne({_id: _id}, (error, doc) => {
-    if(error) throw error
+  try{
+    //checks if the exam session is still open or not
+    let doc = await session_db.findOne({_id: ObjectId(_id)})
 
     if(doc.exam_status === "taken"){
       response.send({status: "FAILED"})
     }
     else{
-      session_db.update({_id: _id}, {$set: {current_question: request.body.current_question, time_left: request.body.secondsLeft}}, {})
-      answers_db.update({_id: _id}, {$set: {answers: request.body.answers}}, {})
+      session_db.updateOne({_id: ObjectId(_id)}, {$set: {current_question: request.body.current_question, time_left: request.body.secondsLeft}}, {})
+      answers_db.updateOne({_id: ObjectId(_id)}, {$set: {answers: request.body.answers}}, {})
       console.log(`Student exam answers, current question and time left updated successfully. _id: ${_id}. Time: ${new Date().toLocaleString()}`)
       response.send({status: "OK"})
     }
-  })
+  }
+  catch(e){
+    console.log(`Student exam answers, current question and time left failed to be updated. _id: ${_id}. Time: ${new Date().toLocaleString()}`)
+    console.error(e)
+    response.status(404).send({status: "FAILED"});
+  }
 })
 
 //ends the exam
 student.post('/stop-exam', requireAuth,(request, response) => {
   let _id = request._id;
-  session_db.update({_id: _id}, {$set: {exam_status: 'taken', "time_stamp.stop": new Date().toLocaleString(),time_left: request.body.secondsLeft}}, {})
-  answers_db.update({_id: _id}, {$set: {answers: request.body.answers}}, {})
-  console.log(`Exam submitted successfully. _id:${_id}. Time: ${new Date().toLocaleString()}`)
+  try{
+    session_db.updateOne({_id: ObjectId(_id)}, {$set: {exam_status: 'taken', "time_stamp.stop": new Date().toLocaleString(), "time_stamp.stop_uts": new Date().getTime()/1000, time_left: request.body.secondsLeft}}, {})
+    answers_db.updateOne({_id: ObjectId(_id)}, {$set: {answers: request.body.answers}}, {});
+    console.log(`Exam submitted successfully. _id:${_id}. Time: ${new Date().toLocaleString()}`);
 
-  response.send({status: "OK"})
+    response.send({status: "OK"});
+  }
+  catch(error){
+    console.log(`Exam submission failed due to database error. _id:${_id}. Time: ${new Date().toLocaleString()}`);
+    console.error(error);
+    response.status(404).send({status: "FAILED"});
+  }
 })
+
 module.exports = student
