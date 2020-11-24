@@ -180,7 +180,7 @@ student.get('/start-exam', async (request, response) => {
       console.log(`Student exam session started successfully. _id: ${_id}. Time: ${new Date().toLocaleString()}`)
       
       //makes sure the exam session automatically ends at exactly 2:45 pm, 24th November if student does not end the exam
-      let time_stamp_milliseconds = new Date(2020, 10, 24, 14, 45).getTime() - new Date().getTime()
+      let time_stamp_milliseconds = new Date(2020, 10, 25, 14, 45).getTime() - new Date().getTime()
       setTimeout(async () => {
         //get session information from database
         let document = await session_db.findOne({_id: ObjectId(_id)})
