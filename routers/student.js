@@ -179,8 +179,8 @@ student.get('/start-exam', async (request, response) => {
       session_db.updateOne({ _id: ObjectId(_id) }, { $set: {exam_status: 'in session', "time_stamp.start": new Date().toLocaleString(), "time_stamp.start_uts": new Date().getTime()/1000}}, {});
       console.log(`Student exam session started successfully. _id: ${_id}. Time: ${new Date().toLocaleString()}`)
       
-      //makes sure the exam session automatically ends at exactly 10:35 am, 24th November if student does not end the exam
-      let time_stamp_milliseconds = new Date(2020, 10, 24, 10, 35).getTime() - new Date().getTime()
+      //makes sure the exam session automatically ends at exactly 2:45 pm, 24th November if student does not end the exam
+      let time_stamp_milliseconds = new Date(2020, 10, 24, 14, 45).getTime() - new Date().getTime()
       setTimeout(async () => {
         //get session information from database
         let document = await session_db.findOne({_id: ObjectId(_id)})
