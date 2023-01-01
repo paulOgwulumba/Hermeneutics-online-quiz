@@ -1,0 +1,148 @@
+<html>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    .container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      padding: 65px 0px;
+      background-color: #fafafa;
+      overflow-x: hidden;
+    }
+    
+    .wrapper {
+      width: 100%;
+    }
+    
+    .wrapper img {
+      width: 124.88px;
+      height: 32.06px;
+      margin-bottom: 16px;
+    }
+    
+    .box {
+      padding: 24px 16px;
+      background-color: #FFF;
+      border: 0.5px solid #C3CCD3;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 24px 16px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    
+    .box .heading {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 28px;
+      letter-spacing: 0.02em;
+      color: #001620;
+      width: 100%;
+    }
+    
+    .box .body {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0px;
+      gap: 16px;
+      width: 100%;
+    }
+    
+    .box .body p {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 10px;
+      line-height: 16px;
+      letter-spacing: 0.02em;
+      color: #002A3E;
+      text-align: justify;
+    }
+    
+    .box .body a {
+      width: 100%;
+    }
+
+    .box .body a p {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 16px;
+        letter-spacing: 0.02em;
+        color: #0D3DDC;
+    }
+    
+    @media (min-width: 768px) {
+      .container {
+        padding: 139px 0;
+      }
+      
+      .wrapper {
+        width: 471px;
+      }
+      
+      .box {
+        padding: 32px 24px;
+        gap: 24px;
+      }
+      .wrapper img {
+        width: 166.5px;
+        height: 42.75px;
+        margin-bottom: 24px;
+      }
+      
+      .box .heading {
+        font-size: 24px;
+        line-height: 32px;
+      }
+      
+      .box .body p {
+        font-size: 12px;
+        line-height: 20px;
+      }
+      
+      .box .body a p {
+        font-size: 18px;
+        line-height: 24px;
+      }
+    }
+  </style>
+  
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <img 
+          src = 'https://res.cloudinary.com/dzl7hb2xw/image/upload/v1672566490/blocktremp/Logo_with_Type_bokgzu.svg'
+        />
+        
+        <div class="box">
+          <div class="heading">
+            Hello!
+          </div>
+          
+          <div class="body">
+            <p>
+              You are receiving this email because you have forgotten your password and want to get back into your account. Click the link below to reset your password.
+            </p>
+            
+            <a href="https://www.blocktremp.com/accountreset+u7y783bhd)8auth-0">
+                <p>Password reset link.</p>
+            </a>
+            
+            <p>
+              Kindly ignore this mail if you didn’t request a password reset.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
